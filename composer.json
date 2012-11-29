@@ -1,20 +1,34 @@
 {
     "name": "aura/intl",
     "type": "aura-package",
-    "description": "The Aura Intl package provides internationalization tools, specifically message translation.",
-    "keywords": ["intl", "internationalization", "i18n", "l10n", "localization", "globalization", "g11n"],
+    "description": "The Aura.Intl package provides internationalization (I18N) tools, specifically\npackage-oriented per-locale message translation.",
+    "keywords": [
+        "intl",
+        "i18n",
+        "internationalization",
+        "l10n",
+        "localization",
+        "g11n",
+        "globalization"
+    ],
     "homepage": "http://auraphp.github.com/Aura.Intl",
-    "version": "1.0.0-dev",
+    "version": "1.0.0-beta1",
+    "time": "2012-11-29",
     "license": "BSD-2-Clause",
     "authors": [
         {
-            "name": "Aura Contributors",
+            "name": "Aura.Intl Contributors",
             "homepage": "https://github.com/auraphp/Aura.Intl/contributors"
+        },
+        {
+            "name": "Paul M. Jones",
+            "email": "pmjones88@gmail.com",
+            "homepage": "http://paul-m-jones.com"
         }
     ],
     "require": {
         "php": ">=5.4.0",
-        "aura/installer-default": "*"
+        "aura/installer-default": ">=1.0.0"
     },
     "autoload": {
         "psr-0": {
