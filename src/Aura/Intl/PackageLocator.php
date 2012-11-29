@@ -17,19 +17,28 @@ namespace Aura\Intl;
  * @package Aura.Intl
  * 
  */
-class PackageLocator
+class PackageLocator implements PackageLocatorInterface
 {
     /**
-     *
+     * 
+     * A registry of packages.
+     * 
+     * Unlike many other registries, this one is two layers deep. The first
+     * key is a package name, the second key is a locale code, and the value
+     * is the package information for that name and locale.
+     * 
      * @var array
+     * 
      */
     protected $registry = [];
 
     /**
      * 
-     * Constructor
+     * Constructor.
      * 
-     * @param array $registry
+     * @param array $registry A registry of packages.
+     * 
+     * @see $registry
      * 
      */
     public function __construct(array $registry = [])
@@ -43,13 +52,16 @@ class PackageLocator
 
     /**
      * 
-     * set the package specification
+     * Sets a Package object.
      * 
-     * @param string $name
+     * @param string $name The package name.
      * 
-     * @param string $locale
+     * @param string $locale The locale for the package.
      * 
-     * @param array|callable $spec
+     * @param Package|callable $spec The package object, or a callable to 
+     * create and return one.
+     * 
+     * @return void
      * 
      */
     public function set($name, $locale, $spec)
@@ -57,6 +69,17 @@ class PackageLocator
         $this->registry[$name][$locale] = $spec;
     }
     
+    /**
+     * 
+     * Gets a Package object.
+     * 
+     * @param string $name The package name.
+     * 
+     * @param string $locale The locale for the package.
+     * 
+     * @return Package
+     * 
+     */
     public function get($name, $locale)
     {
         if (! isset($this->registry[$name][$locale])) {
