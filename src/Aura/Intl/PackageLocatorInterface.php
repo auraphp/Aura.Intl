@@ -8,17 +8,43 @@
  * @license http://opensource.org/licenses/bsd-license.php BSD
  * 
  */
-namespace Aura\Intl\Catalog;
+namespace Aura\Intl;
 
 /**
  * 
- * Catalog Interface
+ * Package locator interface.
  * 
  * @package Aura.Intl
  * 
  */
-interface CatalogInterface
+interface PackageLocatorInterface
 {
+    /**
+     * 
+     * Sets a Package object.
+     * 
+     * @param string $name The package name.
+     * 
+     * @param string $locale The locale for the package.
+     * 
+     * @param Package|callable $spec The package object, or a callable to 
+     * create and return one.
+     * 
+     * @return void
+     * 
+     */
     public function set($name, $locale, $spec);
+    
+    /**
+     * 
+     * Gets a Package object.
+     * 
+     * @param string $name The package name.
+     * 
+     * @param string $locale The locale for the package.
+     * 
+     * @return Package
+     * 
+     */
     public function get($name, $locale);
 }

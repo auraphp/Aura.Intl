@@ -38,35 +38,46 @@ class TranslatorLocator
     protected $locale;
 
     /**
-     *
-     * @var \Aura\Intl\Translator\Factory
+     * 
+     * A translator factory.
+     * 
+     * @var TranslatorFactory
+     * 
+     * 
      */
     protected $factory;
 
     /**
      *
-     * @var string
+     * A package locator.
+     * 
+     * @var PackageLocator
+     * 
      */
     protected $packages;
 
     /**
-     *
-     * @var \Aura\Intl\Formatter\FormatterInterface
+     * 
+     * A formatter locator.
+     * 
+     * @var FormatterInterface
+     * 
      */
-    protected $formatter;
+    protected $formatters;
 
     /**
      * 
      * Constructor.
      * 
-     * @param PackagesInterface $packages
+     * @param PackageLocator $packages The package locator.
      * 
-     * @param FormatterLocator $formatters
+     * @param FormatterLocator $formatters The formatter lcoator.
      * 
      * @param TranslatorFactory $factory A translator factory to
      * create translator objects for the locale and package.
      * 
-     * @param type $locale
+     * @param string $locale The default locale code to use.
+     * 
      */
     public function __construct(
         PackageLocator $packages,
@@ -82,7 +93,7 @@ class TranslatorLocator
 
     /**
      * 
-     * Sets the current locale code.
+     * Sets the default locale code.
      * 
      * @param string $locale The new locale code.
      * 
@@ -96,7 +107,7 @@ class TranslatorLocator
 
     /**
      * 
-     * Returns the current locale code.
+     * Returns the default locale code.
      * 
      * @return string
      * 
@@ -143,11 +154,11 @@ class TranslatorLocator
 
     /**
      * 
-     * Gets a translator from the registry by package for the current locale.
+     * Gets a translator from the registry by package for a locale.
      * 
-     * @param string $package The translator package to retrieve.
+     * @param string $name The translator package to retrieve.
      * 
-     * @param string $package The locale to use; if empty, uses the current
+     * @param string $locale The locale to use; if empty, uses the default
      * locale.
      * 
      * @return TranslatorInterface A translator object.

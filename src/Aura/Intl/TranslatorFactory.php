@@ -19,6 +19,13 @@ namespace Aura\Intl;
  */
 class TranslatorFactory
 {
+    /**
+     * 
+     * The class to use for new instances.
+     * 
+     * @var string
+     * 
+     */
     protected $class = 'Aura\Intl\Translator';
     
     /**

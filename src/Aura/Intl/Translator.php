@@ -20,37 +20,53 @@ namespace Aura\Intl;
 class Translator implements TranslatorInterface
 {
     /**
-     *
-     * @var string
+     * 
+     * A fallback translator.
+     * 
+     * @var TranslatorInterface
+     * 
      */
     protected $fallback;
 
     /**
-     *
+     * 
+     * The formatter to use when translating messages.
+     * 
      * @var FormatterInterface
+     * 
      */
     protected $formatter;
 
     /**
-     *
+     * 
+     * The locale being used for translations.
+     * 
      * @var string
+     * 
      */
     protected $locale;
 
     /**
-     *
+     * 
+     * The message keys and translations.
+     * 
      * @var array
+     * 
      */
     protected $messages = [];
 
     /**
      * 
-     * constructor
+     * Constructor
      * 
-     * @param string $locale
-     * @param array $messages
-     * @param FormatterInterface $formatter
-     * @param TranslatorInterface $fallback
+     * @param string $locale The locale being used.
+     * 
+     * @param array $messages The message keys and translations.
+     * 
+     * @param FormatterInterface $formatter A message formatter.
+     * 
+     * @param TranslatorInterface $fallback A fallback translator.
+     * 
      */
     public function __construct(
         $locale,
@@ -66,11 +82,11 @@ class Translator implements TranslatorInterface
 
     /**
      * 
-     * Get the message
+     * Gets the message translation by its key.
      * 
-     * @param string $key
+     * @param string $key The message key.
      * 
-     * @return boolean
+     * @return mixed The message translation string, or false if not found.
      * 
      */
     protected function getMessage($key)
@@ -94,13 +110,15 @@ class Translator implements TranslatorInterface
 
     /**
      * 
-     * Translate the key with the token values replaced
+     * Translates the message indicated by they key, replacing token values
+     * along the way.
      * 
-     * @param string $key
+     * @param string $key The message key.
      * 
-     * @param array $tokens_values
+     * @param array $tokens_values Token values to interpolate into the
+     * message.
      * 
-     * @return string
+     * @return string The translated message with tokens replaced.
      * 
      */
     public function translate($key, array $tokens_values = [])
