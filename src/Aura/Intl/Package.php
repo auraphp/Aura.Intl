@@ -51,7 +51,7 @@ class Package
      * 
      * Constructor.
      * 
-     * @param string $formattter The name of the formatter to use.
+     * @param string $formatter The name of the formatter to use.
      * 
      * @param string $fallback The name of the fallback package to use.
      * 
