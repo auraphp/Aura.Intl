@@ -68,7 +68,7 @@ class PackageLocator implements PackageLocatorInterface
     {
         $this->registry[$name][$locale] = $spec;
     }
-    
+
     /**
      * 
      * Gets a Package object.
@@ -85,12 +85,12 @@ class PackageLocator implements PackageLocatorInterface
         if (! isset($this->registry[$name][$locale])) {
             throw new Exception("Package '$name' with locale '$locale' is not registered.");
         }
-        
+
         if ($this->registry[$name][$locale] instanceof \Closure) {
             $func = $this->registry[$name][$locale];
             $this->registry[$name][$locale] = $func();
         }
-        
+
         return $this->registry[$name][$locale];
     }
 }

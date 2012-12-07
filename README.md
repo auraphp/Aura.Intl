@@ -165,7 +165,7 @@ different token values. The `IntlFormatter` *is* capable, but the PHP
 it, and we must specify the `'intl'` formatter for the package in the catalog.
 
 When using the `IntlFormatter`, we can build our message strings to present
-singluar or plural messages, as in the following example:
+singular or plural messages, as in the following example:
 
 ```php
 <?php
