@@ -34,7 +34,7 @@ interface PackageLocatorInterface
      * 
      */
     public function set($name, $locale, $spec);
-    
+
     /**
      * 
      * Gets a Package object.
