@@ -27,7 +27,7 @@ class Package
      * 
      */
     protected $messages;
-    
+
     /**
      * 
      * The name of a fallback package to use when a message key does not
@@ -37,7 +37,7 @@ class Package
      * 
      */
     protected $fallback;
-    
+
     /**
      * 
      * The name of the formatter to use when formatting translated messages.
@@ -46,7 +46,7 @@ class Package
      * 
      */
     protected $formatter;
-    
+
     /**
      * 
      * Constructor.
@@ -67,7 +67,7 @@ class Package
         $this->fallback  = $fallback;
         $this->messages  = $messages;
     }
-    
+
     /**
      * 
      * Sets the messages for this package.
@@ -81,7 +81,7 @@ class Package
     {
         $this->messages = $messages;
     }
-    
+
     /**
      * 
      * Gets the messages for this package.
@@ -93,7 +93,7 @@ class Package
     {
         return $this->messages;
     }
-    
+
     /**
      * 
      * Sets the formatter name for this package.
@@ -107,7 +107,7 @@ class Package
     {
         $this->formatter = $formatter;
     }
-    
+
     /**
      * 
      * Gets the formatter name for this package.
@@ -119,7 +119,7 @@ class Package
     {
         return $this->formatter;
     }
-    
+
     /**
      * 
      * Sets the fallback package name.
@@ -133,7 +133,7 @@ class Package
     {
         $this->fallback = $fallback;
     }
-    
+
     /**
      * 
      * Gets the fallback package name.

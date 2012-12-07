@@ -71,7 +71,7 @@ class TranslatorLocator
      * 
      * @param PackageLocator $packages The package locator.
      * 
-     * @param FormatterLocator $formatters The formatter lcoator.
+     * @param FormatterLocator $formatters The formatter locator.
      * 
      * @param TranslatorFactory $factory A translator factory to
      * create translator objects for the locale and package.
@@ -175,10 +175,10 @@ class TranslatorLocator
         }
 
         if (! isset($this->registry[$name][$locale])) {
-            
+
             // get the package descriptor
             $package = $this->packages->get($name, $locale);
-            
+
             // build a translator; note the recursive nature of the
             // 'fallback' param at the very end.
             $translator = $this->factory->newInstance(
@@ -187,7 +187,7 @@ class TranslatorLocator
                 $this->formatters->get($package->getFormatter()),
                 $this->get($package->getFallback(), $locale)
             );
-            
+
             // retain in the registry
             $this->registry[$name][$locale] = $translator;
         }

@@ -27,7 +27,7 @@ class TranslatorFactory
      * 
      */
     protected $class = 'Aura\Intl\Translator';
-    
+
     /**
      * 
      * Returns a new Translator.
