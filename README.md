@@ -137,7 +137,7 @@ $packages->set('Vendor.Dynamic', 'en_US', $package);
 // Brazilian Portuguese messages
 $package = new Package;
 $package->setMessages([
-    'PAGE' => 'Página {:page} de {:pages} pages.';
+    'PAGE' => 'Página {:page} de {:pages}';
 ]);
 $packages->set('Vendor.Dynamic', 'pt_BR', $package);
 ```
@@ -152,7 +152,7 @@ $translator = $translators->get('Vendor.Dynamic');
 echo $translator->translate('PAGE', [
     'page' => 1,
     'pages' => 1,
-]); // 'Página 1 de 1 páginas.'
+]); // 'Página 1 de 1.'
 ```
 
 Pluralized Messages
