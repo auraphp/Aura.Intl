@@ -26,7 +26,7 @@ class IntlFormatterTest extends BasicFormatterTest
         $string = '{:pages,plural,'
                 . '=0{No pages.}'
                 . '=1{One page only.}'
-                . 'other{Page {:page} of {:pages} pages.}'
+                . 'other{Page {:page} of # pages.}'
                 . '}';
         
         $tokens_values = ['page' => 0, 'pages' => 0];
