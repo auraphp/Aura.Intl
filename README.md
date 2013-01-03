@@ -130,14 +130,14 @@ $packages = $translators->getPackages();
 // US English messages
 $package = new Package;
 $package->setMessages([
-    'PAGE' => 'Page {:page} of {:pages} pages.';
+    'PAGE' => 'Page {page} of {pages} pages.';
 ]);
 $packages->set('Vendor.Dynamic', 'en_US', $package);
 
 // Brazilian Portuguese messages
 $package = new Package;
 $package->setMessages([
-    'PAGE' => 'Página {:page} de {:pages} pages.';
+    'PAGE' => 'Página {page} de {pages} pages.';
 ]);
 $packages->set('Vendor.Dynamic', 'pt_BR', $package);
 ```
@@ -175,10 +175,10 @@ $packages = $translators->getCatalog();
 // get the Vendor.Dynamic package en_US locale and set
 // US English messages with pluralization
 $package->setMessages([
-    'PAGE' => '{:pages,plural,'
+    'PAGE' => '{pages,plural,'
             . '=0{No pages.}'
             . '=1{One page only.}'
-            . 'other{Page {:page} of {:pages} pages.}'
+            . 'other{Page {page} of {pages} pages.}'
             . '}'
 ]);
 

@@ -16,7 +16,7 @@ class BasicFormatterTest extends \PHPUnit_Framework_TestCase
         $expect = 'Hello world 88!';
         $tokens_values = ['foo' => 'world', 'bar' => '88', 'baz' => '!'];
         
-        $string = 'Hello {:foo} {:bar}{:baz}';
+        $string = 'Hello {foo} {bar}{baz}';
         $actual = $formatter->format($locale, $string, $tokens_values);
         $this->assertSame($expect, $actual);
     }

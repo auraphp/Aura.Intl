@@ -18,7 +18,7 @@ class TranslatorLocatorTest extends \PHPUnit_Framework_TestCase
                 'mock',
                 null,
                 [
-                    'ERR_NO_SUCH_OPTION' => "The option {:option} is not recognized.",
+                    'ERR_NO_SUCH_OPTION' => "The option {option} is not recognized.",
                 ]
             );
         };
@@ -28,7 +28,7 @@ class TranslatorLocatorTest extends \PHPUnit_Framework_TestCase
                 'mock',
                 null,
                 [
-                    'ERR_NO_SUCH_OPTION' => "O {:option} opção não é reconhecido.",
+                    'ERR_NO_SUCH_OPTION' => "O {option} opção não é reconhecido.",
                 ]
             );
         };

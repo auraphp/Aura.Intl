@@ -16,7 +16,7 @@ class PackageTest extends \PHPUnit_Framework_TestCase
         $this->package->setFallback('Vendor.Fallback');
         $this->package->setFormatter('intl');
         $this->package->setMessages([
-            'ERR_NO_SUCH_OPTION' => "The option {:option} is not recognized.",
+            'ERR_NO_SUCH_OPTION' => "The option {option} is not recognized.",
         ]);
     }
 
@@ -31,7 +31,7 @@ class PackageTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expect, $actual);
         
         $expect = [
-            'ERR_NO_SUCH_OPTION' => "The option {:option} is not recognized.",
+            'ERR_NO_SUCH_OPTION' => "The option {option} is not recognized.",
         ];
         $actual = $this->package->getMessages();
         $this->assertSame($expect, $actual);
