@@ -173,12 +173,14 @@ singular or plural messages, as in the following example:
 $packages = $translators->getCatalog();
 
 // get the Vendor.Dynamic package en_US locale and set
-// US English messages with pluralization
+// US English messages with pluralization. note the use
+// of # instead of {pages} herein; using the placeholder
+// "inside itself" with the Intl formatter causes trouble.
 $package->setMessages([
     'PAGE' => '{pages,plural,'
             . '=0{No pages.}'
             . '=1{One page only.}'
-            . 'other{Page {page} of {pages} pages.}'
+            . 'other{Page {page} of # pages.}'
             . '}'
 ]);
 
