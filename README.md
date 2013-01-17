@@ -137,7 +137,7 @@ $packages->set('Vendor.Dynamic', 'en_US', $package);
 // Brazilian Portuguese messages
 $package = new Package;
 $package->setMessages([
-    'PAGE' => 'Página {page} de {pages} pages.';
+    'PAGE' => 'Página {page} de {pages} páginas.';
 ]);
 $packages->set('Vendor.Dynamic', 'pt_BR', $package);
 ```
