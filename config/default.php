@@ -20,4 +20,6 @@ $di->params['Aura\Intl\TranslatorLocator']['packages'] = $di->lazyNew('Aura\Intl
 /**
  * Dependency services.
  */
+$di->set('intl_package_factory', $di->lazyNew('Aura\Intl\PackageFactory'));
 $di->set('intl_translator_locator', $di->lazyNew('Aura\Intl\TranslatorLocator'));
+
