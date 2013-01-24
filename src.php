@@ -1,10 +1,14 @@
 <?php
 require_once __DIR__ . '/src/Aura/Intl/Exception.php';
+require_once __DIR__ . '/src/Aura/Intl/Exception/CannotFormat.php';
+require_once __DIR__ . '/src/Aura/Intl/Exception/CannotInstantiateFormatter.php';
+require_once __DIR__ . '/src/Aura/Intl/Exception.php';
 require_once __DIR__ . '/src/Aura/Intl/FormatterInterface.php';
 require_once __DIR__ . '/src/Aura/Intl/FormatterLocator.php';
 require_once __DIR__ . '/src/Aura/Intl/BasicFormatter.php';
 require_once __DIR__ . '/src/Aura/Intl/IntlFormatter.php';
 require_once __DIR__ . '/src/Aura/Intl/Package.php';
+require_once __DIR__ . '/src/Aura/Intl/PackageFactory.php';
 require_once __DIR__ . '/src/Aura/Intl/PackageLocatorInterface.php';
 require_once __DIR__ . '/src/Aura/Intl/PackageLocator.php';
 require_once __DIR__ . '/src/Aura/Intl/TranslatorInterface.php';

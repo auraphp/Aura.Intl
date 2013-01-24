@@ -102,9 +102,36 @@ class IntlFormatterTest extends BasicFormatterTest
     public function testFormat_cannotInstantiateFormatter()
     {
         $locale = 'en_US';
-        $string = 'Hello {bad}';
+        // uses {count} instead of #, which should fail
+        $string = "
+            {gender, select,
+                female {
+                    {count, plural, offset:1
+                        =0 {{from} does not give a party.}
+                        =1 {{from} invites {to} to her party.}
+                        =2 {{from} invites {to} and one other person to her party.}
+                        other {{from} invites {to} as one of the {count} people invited to her party.}
+                    }
+                }
+                male {
+                    {count, plural, offset:1
+                        =0 {{from} does not give a party.}
+                        =1 {{from} invites {to} to his party.}
+                        =2 {{from} invites {to} and one other person to his party.}
+                        other {{from} invites {to} as one of the {count} other people invited to his party.}
+                    }
+                }
+                other {
+                    {count, plural, offset:1
+                        =0 {{from} does not give a party.}
+                        =1 {{from} invites {to} to their party.}
+                        =2 {{from} invites {to} and one other person to their party.}
+                        other {{from} invites {to} as one of the {count} other people invited to their party.}
+                    }
+                }
+            }";
         $formatter = $this->newFormatter();
-        $this->setExpectedException('Aura\Intl\Exception');
+        $this->setExpectedException('Aura\Intl\Exception\CannotInstantiateFormatter');
         $actual = $formatter->format($locale, $string, []);
     }
     
@@ -114,7 +141,7 @@ class IntlFormatterTest extends BasicFormatterTest
         $string = 'Hello {foo}';
         $tokens_values = ['bar' => 'baz']; // no 'foo' token
         $formatter = $this->newFormatter();
-        $this->setExpectedException('Aura\Intl\Exception');
+        $this->setExpectedException('Aura\Intl\Exception\CannotFormat');
         $actual = $formatter->format($locale, $string, $tokens_values);
     }
 }

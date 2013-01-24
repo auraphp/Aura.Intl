@@ -73,7 +73,7 @@ class IntlFormatter implements FormatterInterface
 
         $formatter = new MessageFormatter($locale, $string);
         if (! $formatter) {
-            throw new Exception(
+            throw new Exception\CannotInstantiateFormatter(
                 intl_get_error_message(),
                 intl_get_error_code()
             );
@@ -81,7 +81,7 @@ class IntlFormatter implements FormatterInterface
 
         $result = $formatter->format($values);
         if ($result === false) {
-            throw new Exception(
+            throw new Exception\CannotFormat(
                 $formatter->getErrorMessage(),
                 $formatter->getErrorCode()
             );

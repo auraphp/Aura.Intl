@@ -12,11 +12,13 @@ class PackageTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->package = new Package;
-        $this->package->setFallback('Vendor.Fallback');
-        $this->package->setFormatter('intl');
-        $this->package->setMessages([
-            'ERR_NO_SUCH_OPTION' => "The option {option} is not recognized.",
+        $factory = new PackageFactory;
+        $this->package = $factory->newInstance([
+            'fallback' => 'Vendor.Fallback',
+            'formatter' => 'intl',
+            'messages' => [
+                'ERR_NO_SUCH_OPTION' => "The option {option} is not recognized.",
+            ],
         ]);
     }
 
