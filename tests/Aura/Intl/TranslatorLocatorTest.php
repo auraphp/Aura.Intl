@@ -36,7 +36,7 @@ class TranslatorLocatorTest extends \PHPUnit_Framework_TestCase
         $this->packages = new PackageLocator($registry);
         
         $this->formatters = new FormatterLocator([
-            'mock' => new MockFormatter,
+            'mock' => function () { return new MockFormatter; },
         ]);
         
         $this->factory = new TranslatorFactory;

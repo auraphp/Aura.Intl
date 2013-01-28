@@ -30,13 +30,20 @@ class FormatterLocator
 
     /**
      * 
+     * Tracks whether or not a registry entry has been converted from a 
+     * callable to a formatter object.
+     * 
+     * @var array
+     * 
+     */
+    protected $converted = [];
+    
+    /**
+     * 
      * Constructor.
      * 
      * @param array $registry An array of key-value pairs where the key is the
-     * formatter name (doubles as a method name) and the value is the formatter
-     * object. The value may also be a closure that returns a formatter object.
-     * Note that is has to be a closure, not just any callable, because the
-     * formatter object itself might be callable.
+     * formatter name the value is a callable that returns a formatter object.
      * 
      */
     public function __construct(array $registry = [])
@@ -50,11 +57,9 @@ class FormatterLocator
      * 
      * Sets a formatter into the registry by name.
      * 
-     * @param string $name The formatter name; this doubles as a method name
-     * when called from a template.
+     * @param string $name The formatter name.
      * 
-     * @param string $spec The formatter specification, typically a closure that
-     * builds and returns a formatter object.
+     * @param callable $spec A callable that returns a formatter object.
      * 
      * @return void
      * 
@@ -62,6 +67,7 @@ class FormatterLocator
     public function set($name, $spec)
     {
         $this->registry[$name] = $spec;
+        $this->converted[$name] = false;
     }
 
     /**
@@ -76,12 +82,13 @@ class FormatterLocator
     public function get($name)
     {
         if (! isset($this->registry[$name])) {
-            throw new Exception("Formatter not mapped: '{$name}'.");
+            throw new Exception\FormatterNotMapped($name);
         }
 
-        if ($this->registry[$name] instanceof \Closure) {
+        if (! $this->converted[$name]) {
             $func = $this->registry[$name];
             $this->registry[$name] = $func();
+            $this->converted[$name] = true;
         }
 
         return $this->registry[$name];

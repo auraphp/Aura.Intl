@@ -25,13 +25,23 @@ class PackageLocator implements PackageLocatorInterface
      * 
      * Unlike many other registries, this one is two layers deep. The first
      * key is a package name, the second key is a locale code, and the value
-     * is the package information for that name and locale.
+     * is a callable that returns a Package object for that name and locale.
      * 
      * @var array
      * 
      */
     protected $registry = [];
 
+    /**
+     * 
+     * Tracks whether or not a registry entry has been converted from a 
+     * callable to a Package object.
+     * 
+     * @var array
+     * 
+     */
+    protected $converted = [];
+    
     /**
      * 
      * Constructor.
@@ -58,15 +68,15 @@ class PackageLocator implements PackageLocatorInterface
      * 
      * @param string $locale The locale for the package.
      * 
-     * @param Package|callable $spec The package object, or a callable to 
-     * create and return one.
+     * @param callable $spec A callable that returns a package.
      * 
      * @return void
      * 
      */
-    public function set($name, $locale, $spec)
+    public function set($name, $locale, callable $spec)
     {
         $this->registry[$name][$locale] = $spec;
+        $this->converted[$name][$locale] = false;
     }
 
     /**
@@ -86,9 +96,10 @@ class PackageLocator implements PackageLocatorInterface
             throw new Exception("Package '$name' with locale '$locale' is not registered.");
         }
 
-        if ($this->registry[$name][$locale] instanceof \Closure) {
+        if (! $this->converted[$name][$locale]) {
             $func = $this->registry[$name][$locale];
             $this->registry[$name][$locale] = $func();
+            $this->converted[$name][$locale] = true;
         }
 
         return $this->registry[$name][$locale];

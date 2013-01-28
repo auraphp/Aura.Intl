@@ -27,13 +27,12 @@ interface PackageLocatorInterface
      * 
      * @param string $locale The locale for the package.
      * 
-     * @param Package|callable $spec The package object, or a callable to 
-     * create and return one.
+     * @param callable $spec A callable that returns a Package object.
      * 
      * @return void
      * 
      */
-    public function set($name, $locale, $spec);
+    public function set($name, $locale, callable $spec);
 
     /**
      * 
