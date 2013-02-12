@@ -7,6 +7,13 @@ class IntlFormatterTest extends BasicFormatterTest
     {
         return new IntlFormatter;
     }
+
+    public function setUp()
+    {
+        if (! extension_loaded('intl')) {
+            $this->markTestSkipped('This test is skipped if the Intl Extension is not loaded.');
+        }
+    }
     
     /**
      * This test fails on PHP 5.4.4
@@ -50,11 +57,6 @@ class IntlFormatterTest extends BasicFormatterTest
      */
     public function testFormat_select($tokens_values, $expect)
     {
-        // https://github.com/php/php-src/blob/master/ext/intl/tests/msgfmt_format_subpatterns.phpt
-        if (version_compare(INTL_ICU_VERSION, '4.8') < 0) {
-            $this->markTestSkipped('Skip for ICU 4.8+');
-        }
-        
         $locale = 'en_US';
         $string = "
             {gender, select,
