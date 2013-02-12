@@ -3,6 +3,7 @@ require_once __DIR__ . '/src/Aura/Intl/Exception.php';
 require_once __DIR__ . '/src/Aura/Intl/Exception/CannotFormat.php';
 require_once __DIR__ . '/src/Aura/Intl/Exception/CannotInstantiateFormatter.php';
 require_once __DIR__ . '/src/Aura/Intl/Exception/FormatterNotMapped.php';
+require_once __DIR__ . '/src/Aura/Intl/Exception/IcuVersionTooLow.php';
 require_once __DIR__ . '/src/Aura/Intl/Exception.php';
 require_once __DIR__ . '/src/Aura/Intl/FormatterInterface.php';
 require_once __DIR__ . '/src/Aura/Intl/FormatterLocator.php';
