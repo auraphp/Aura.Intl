@@ -22,6 +22,20 @@ use MessageFormatter;
 class IntlFormatter implements FormatterInterface
 {
     /**
+     * Constructor for IntlFormatter
+     *
+     * Throws IcuVersionTooLow Exception when the Version of ICU installed is too low for Aura.Intl to work properly.
+     *
+     * @throws Exception
+     */
+    public function __construct()
+    {
+        if (version_compare(INTL_ICU_VERSION, '4.8') < 0) {
+            throw new Exception\IcuVersionTooLow('ICU Version 4.8 or higher required.');
+        }
+    }
+
+    /**
      * 
      * Format the message with the help of php intl extension
      * 
