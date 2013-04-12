@@ -12,8 +12,7 @@
         "globalization"
     ],
     "homepage": "http://auraphp.github.com/Aura.Intl",
-    "version": "1.0.0-beta1",
-    "time": "2012-11-29",
+    "time": "2013-04-12",
     "license": "BSD-2-Clause",
     "authors": [
         {
@@ -24,6 +23,16 @@
             "name": "Paul M. Jones",
             "email": "pmjones88@gmail.com",
             "homepage": "http://paul-m-jones.com"
+        },
+        {
+            "name": "Pascal Borreli",
+            "email": "pascal@borreli.com",
+            "homepage": ""
+        },
+        {
+            "name": "Mapthegod",
+            "email": "mapthegod@gmail.com",
+            "homepage": ""
         }
     ],
     "require": {
