@@ -130,14 +130,14 @@ $packages = $translators->getPackages();
 // US English messages
 $package = new Package;
 $package->setMessages([
-    'PAGE' => 'Page {:page} of {:pages} pages.';
+    'PAGE' => 'Page {page} of {pages} pages.';
 ]);
 $packages->set('Vendor.Dynamic', 'en_US', $package);
 
 // Brazilian Portuguese messages
 $package = new Package;
 $package->setMessages([
-    'PAGE' => 'Página {:page} de {:pages} pages.';
+    'PAGE' => 'Página {page} de {pages} páginas.';
 ]);
 $packages->set('Vendor.Dynamic', 'pt_BR', $package);
 ```
@@ -165,7 +165,7 @@ different token values. The `IntlFormatter` *is* capable, but the PHP
 it, and we must specify the `'intl'` formatter for the package in the catalog.
 
 When using the `IntlFormatter`, we can build our message strings to present
-singluar or plural messages, as in the following example:
+singular or plural messages, as in the following example:
 
 ```php
 <?php
@@ -173,12 +173,14 @@ singluar or plural messages, as in the following example:
 $packages = $translators->getCatalog();
 
 // get the Vendor.Dynamic package en_US locale and set
-// US English messages with pluralization
+// US English messages with pluralization. note the use
+// of # instead of {pages} herein; using the placeholder
+// "inside itself" with the Intl formatter causes trouble.
 $package->setMessages([
-    'PAGE' => '{:pages,plural,'
+    'PAGE' => '{pages,plural,'
             . '=0{No pages.}'
             . '=1{One page only.}'
-            . 'other{Page {:page} of {:pages} pages.}'
+            . 'other{Page {page} of # pages.}'
             . '}'
 ]);
 

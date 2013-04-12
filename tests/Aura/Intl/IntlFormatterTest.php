@@ -7,6 +7,13 @@ class IntlFormatterTest extends BasicFormatterTest
     {
         return new IntlFormatter;
     }
+
+    public function setUp()
+    {
+        if (! extension_loaded('intl')) {
+            $this->markTestSkipped('This test is skipped if the Intl Extension is not loaded.');
+        }
+    }
     
     /**
      * This test fails on PHP 5.4.4
@@ -23,10 +30,10 @@ class IntlFormatterTest extends BasicFormatterTest
     {
         $formatter = $this->newFormatter();
         $locale = 'en_US';
-        $string = '{:pages,plural,'
+        $string = '{pages,plural,'
                 . '=0{No pages.}'
                 . '=1{One page only.}'
-                . 'other{Page {:page} of {:pages} pages.}'
+                . 'other{Page {page} of # pages.}'
                 . '}';
         
         $tokens_values = ['page' => 0, 'pages' => 0];
@@ -50,36 +57,31 @@ class IntlFormatterTest extends BasicFormatterTest
      */
     public function testFormat_select($tokens_values, $expect)
     {
-        // https://github.com/php/php-src/blob/master/ext/intl/tests/msgfmt_format_subpatterns.phpt
-        if (version_compare(INTL_ICU_VERSION, '4.8') < 0) {
-            $this->markTestSkipped('Skip for ICU 4.8+');
-        }
-        
         $locale = 'en_US';
         $string = "
-            {:gender, select,
+            {gender, select,
                 female {
-                    {:count, plural, offset:1
-                        =0 {{:from} does not give a party.}
-                        =1 {{:from} invites {:to} to her party.}
-                        =2 {{:from} invites {:to} and one other person to her party.}
-                        other {{:from} invites {:to} as one of the # people invited to her party.}
+                    {count, plural, offset:1
+                        =0 {{from} does not give a party.}
+                        =1 {{from} invites {to} to her party.}
+                        =2 {{from} invites {to} and one other person to her party.}
+                        other {{from} invites {to} as one of the # people invited to her party.}
                     }
                 }
                 male {
-                    {:count, plural, offset:1
-                        =0 {{:from} does not give a party.}
-                        =1 {{:from} invites {:to} to his party.}
-                        =2 {{:from} invites {:to} and one other person to his party.}
-                        other {{:from} invites {:to} as one of the # other people invited to his party.}
+                    {count, plural, offset:1
+                        =0 {{from} does not give a party.}
+                        =1 {{from} invites {to} to his party.}
+                        =2 {{from} invites {to} and one other person to his party.}
+                        other {{from} invites {to} as one of the # other people invited to his party.}
                     }
                 }
                 other {
-                    {:count, plural, offset:1
-                        =0 {{:from} does not give a party.}
-                        =1 {{:from} invites {:to} to their party.}
-                        =2 {{:from} invites {:to} and one other person to their party.}
-                        other {{:from} invites {:to} as one of the # other people invited to their party.}
+                    {count, plural, offset:1
+                        =0 {{from} does not give a party.}
+                        =1 {{from} invites {to} to their party.}
+                        =2 {{from} invites {to} and one other person to their party.}
+                        other {{from} invites {to} as one of the # other people invited to their party.}
                     }
                 }
             }";
@@ -102,19 +104,46 @@ class IntlFormatterTest extends BasicFormatterTest
     public function testFormat_cannotInstantiateFormatter()
     {
         $locale = 'en_US';
-        $string = 'Hello {::bad}';
+        // uses {count} instead of #, which should fail
+        $string = "
+            {gender, select,
+                female {
+                    {count, plural, offset:1
+                        =0 {{from} does not give a party.}
+                        =1 {{from} invites {to} to her party.}
+                        =2 {{from} invites {to} and one other person to her party.}
+                        other {{from} invites {to} as one of the {count} people invited to her party.}
+                    }
+                }
+                male {
+                    {count, plural, offset:1
+                        =0 {{from} does not give a party.}
+                        =1 {{from} invites {to} to his party.}
+                        =2 {{from} invites {to} and one other person to his party.}
+                        other {{from} invites {to} as one of the {count} other people invited to his party.}
+                    }
+                }
+                other {
+                    {count, plural, offset:1
+                        =0 {{from} does not give a party.}
+                        =1 {{from} invites {to} to their party.}
+                        =2 {{from} invites {to} and one other person to their party.}
+                        other {{from} invites {to} as one of the {count} other people invited to their party.}
+                    }
+                }
+            }";
         $formatter = $this->newFormatter();
-        $this->setExpectedException('Aura\Intl\Exception');
+        $this->setExpectedException('Aura\Intl\Exception\CannotInstantiateFormatter');
         $actual = $formatter->format($locale, $string, []);
     }
     
     public function testFormat_cannotFormat()
     {
         $locale = 'en_US';
-        $string = 'Hello {:foo}';
+        $string = 'Hello {foo}';
         $tokens_values = ['bar' => 'baz']; // no 'foo' token
         $formatter = $this->newFormatter();
-        $this->setExpectedException('Aura\Intl\Exception');
+        $this->setExpectedException('Aura\Intl\Exception\CannotFormat');
         $actual = $formatter->format($locale, $string, $tokens_values);
     }
 }

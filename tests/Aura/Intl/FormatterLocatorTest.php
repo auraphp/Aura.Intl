@@ -31,7 +31,7 @@ class FormatterLocatorTest extends \PHPUnit_Framework_TestCase
     public function testGet_noSuchFormatter()
     {
         $formatters = new FormatterLocator;
-        $this->setExpectedException('Aura\Intl\Exception');
+        $this->setExpectedException('Aura\Intl\Exception\FormatterNotMapped');
         $formatters->get('noSuchFormatter');
     }
 }

@@ -34,9 +34,10 @@ class BasicFormatter implements FormatterInterface
      */
     public function format($locale, $string, array $tokens_values)
     {
+        $replace = [];
         foreach ($tokens_values as $token => $value) {
-            $string = str_replace("{:$token}", $value, $string);
+            $replace['{' . $token . '}'] = $value;
         }
-        return $string;
+        return strtr($string, $replace);
     }
 }
