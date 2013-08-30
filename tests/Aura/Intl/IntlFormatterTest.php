@@ -159,6 +159,6 @@ class IntlFormatterTest extends BasicFormatterTest
         // 5.5.x will leave the placeholder there
         $expect = 'Hello {0}';
         $actual = $formatter->format($locale, $string, $tokens_values);
-        $this->assertSame($string, $actual);
+        $this->assertSame($expect, $actual);
     }
 }
