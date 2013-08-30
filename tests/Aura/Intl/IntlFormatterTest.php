@@ -149,7 +149,13 @@ class IntlFormatterTest extends BasicFormatterTest
         $string = 'Hello {foo}';
         $tokens_values = ['bar' => 'baz']; // no 'foo' token
         $formatter = $this->newFormatter();
-        $this->setExpectedException('Aura\Intl\Exception\CannotFormat');
+        
+        if (version_compare(PHP_VERSION, '5.5') < 0) {
+            // cannot format on 5.4.x
+            $this->setExpectedException('Aura\Intl\Exception\CannotFormat');
+        }
+        
         $actual = $formatter->format($locale, $string, $tokens_values);
+        $this->assertSame($string, $actual);
     }
 }
