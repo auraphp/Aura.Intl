@@ -143,6 +143,7 @@ class IntlFormatterTest extends BasicFormatterTest
         $actual = $formatter->format($locale, $string, []);
     }
     
+    // @todo MAKE IT SO THAT WE CHECK FOR TOKENS IN THE ARRAY
     public function testFormat_cannotFormat()
     {
         $locale = 'en_US';
@@ -155,6 +156,8 @@ class IntlFormatterTest extends BasicFormatterTest
             $this->setExpectedException('Aura\Intl\Exception\CannotFormat');
         }
         
+        // 5.5.x will leave the placeholder there
+        $expect = 'Hello {0}';
         $actual = $formatter->format($locale, $string, $tokens_values);
         $this->assertSame($string, $actual);
     }
