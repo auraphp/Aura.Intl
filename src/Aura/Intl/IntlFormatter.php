@@ -22,15 +22,16 @@ use MessageFormatter;
 class IntlFormatter implements FormatterInterface
 {
     /**
-     * Constructor for IntlFormatter
+     * 
+     * Constructor.
      *
-     * Throws IcuVersionTooLow Exception when the Version of ICU installed is too low for Aura.Intl to work properly.
+     * @throws Exception\IcuVersionTooLow when the Version of ICU installed 
+     * is too low for Aura.Intl to work properly.
      *
-     * @throws Exception
      */
-    public function __construct()
+    public function __construct($icu_version = INTL_ICU_VERSION)
     {
-        if (version_compare(INTL_ICU_VERSION, '4.8') < 0) {
+        if (version_compare($icu_version, '4.8') < 0) {
             throw new Exception\IcuVersionTooLow('ICU Version 4.8 or higher required.');
         }
     }
@@ -80,9 +81,18 @@ class IntlFormatter implements FormatterInterface
         
         $values = [];
         foreach ($tokens as $token => $i) {
-            if (isset($tokens_values[$token])) {
-                $values[$i] = $tokens_values[$token];
+            if (! isset($tokens_values[$token])) {
+                continue;
             }
+            
+            $value = $tokens_values[$token];
+            
+            // convert an array to a CSV string
+            if (is_array($value)) {
+                $value = '"' . implode('", "', $value) . '"';
+            }
+            
+            $values[$i] = $value;
         }
 
         $formatter = new MessageFormatter($locale, $string);

@@ -15,6 +15,12 @@ class IntlFormatterTest extends BasicFormatterTest
         }
     }
     
+    public function testIntlVersion()
+    {
+        $this->setExpectedException('Aura\Intl\Exception\IcuVersionTooLow');
+        $formatter = new IntlFormatter('4.7');
+    }
+    
     /**
      * This test fails on PHP 5.4.4
      * The return value expected is No pages , but returns false
