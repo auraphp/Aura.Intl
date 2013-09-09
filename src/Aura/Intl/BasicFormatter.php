@@ -36,6 +36,10 @@ class BasicFormatter implements FormatterInterface
     {
         $replace = [];
         foreach ($tokens_values as $token => $value) {
+            // convert an array to a CSV string
+            if (is_array($value)) {
+                $value = '"' . implode('", "', $value) . '"';
+            }
             $replace['{' . $token . '}'] = $value;
         }
         return strtr($string, $replace);

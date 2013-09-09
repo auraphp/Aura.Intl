@@ -1,6 +1,8 @@
 Aura.Intl
 =========
 
+[![Build Status](https://travis-ci.org/auraphp/Aura.Intl.png)](https://travis-ci.org/auraphp/Aura.Intl)
+
 The Aura.Intl package provides internationalization (I18N) tools, specifically
 package-oriented per-locale message translation.
 

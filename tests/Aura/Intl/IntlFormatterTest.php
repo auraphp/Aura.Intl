@@ -15,6 +15,12 @@ class IntlFormatterTest extends BasicFormatterTest
         }
     }
     
+    public function testIntlVersion()
+    {
+        $this->setExpectedException('Aura\Intl\Exception\IcuVersionTooLow');
+        $formatter = new IntlFormatter('4.7');
+    }
+    
     /**
      * This test fails on PHP 5.4.4
      * The return value expected is No pages , but returns false
@@ -137,13 +143,22 @@ class IntlFormatterTest extends BasicFormatterTest
         $actual = $formatter->format($locale, $string, []);
     }
     
+    // @todo MAKE IT SO THAT WE CHECK FOR TOKENS IN THE ARRAY
     public function testFormat_cannotFormat()
     {
         $locale = 'en_US';
         $string = 'Hello {foo}';
         $tokens_values = ['bar' => 'baz']; // no 'foo' token
         $formatter = $this->newFormatter();
-        $this->setExpectedException('Aura\Intl\Exception\CannotFormat');
+        
+        if (version_compare(PHP_VERSION, '5.5') < 0) {
+            // cannot format on 5.4.x
+            $this->setExpectedException('Aura\Intl\Exception\CannotFormat');
+        }
+        
+        // 5.5.x will leave the placeholder there
+        $expect = 'Hello {0}';
         $actual = $formatter->format($locale, $string, $tokens_values);
+        $this->assertSame($expect, $actual);
     }
 }

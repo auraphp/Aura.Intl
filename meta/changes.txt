@@ -1,17 +1,5 @@
-- [FIX] Multiple typo fixes; thanks, @pborreli.
+- [CHG] When interpolating array values into strings, now converts the array
+  to comma-separated values instead of printing 'Array'.
 
-- [CHG] Use {foo} instead of {:foo} in line with PSR-3 placeholders.
-
-- [NEW] Add a PackageFactory
-
-- [NEW] Add more-detailed exception classes
-
-- [ADD] In config, add 'intl_package_factory' as a service
-
-- [CHG] Throw IcuVersionTooLow Exception if IntlFormatter is instantiated with
-  ICU Version lower than 4.8; Skip all IntlFormatter tests if the intl
-  extension is not loaded. Thanks, @mapthegod.
-
-- [CHG] In the FormatterLocator, registry entries *must* be wrapped in a
-  callable from now on.
-
+- [DOC] PHP 5.5 appears to be able to format strings with missing token
+  replacements; updated tests to account for this.

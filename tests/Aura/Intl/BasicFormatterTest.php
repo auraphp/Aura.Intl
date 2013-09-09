@@ -19,5 +19,11 @@ class BasicFormatterTest extends \PHPUnit_Framework_TestCase
         $string = 'Hello {foo} {bar}{baz}';
         $actual = $formatter->format($locale, $string, $tokens_values);
         $this->assertSame($expect, $actual);
+        
+        $tokens_values = ['array' => ['foo', 'bar', 'baz']];
+        $string = 'Array {array}';
+        $expect = 'Array "foo", "bar", "baz"';
+        $actual = $formatter->format($locale, $string, $tokens_values);
+        $this->assertSame($expect, $actual);
     }
 }
