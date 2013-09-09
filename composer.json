@@ -1,5 +1,6 @@
 {
     "name": "aura/intl",
+    "version": "1.0.0",
     "type": "aura-package",
     "description": "The Aura.Intl package provides internationalization (I18N) tools, specifically\npackage-oriented per-locale message translation.",
     "keywords": [
@@ -11,8 +12,8 @@
         "g11n",
         "globalization"
     ],
-    "homepage": "http://auraphp.github.com/Aura.Intl",
-    "time": "2013-04-12",
+    "homepage": "http://auraphp.com/Aura.Intl",
+    "time": "2013-09-09",
     "license": "BSD-2-Clause",
     "authors": [
         {
