@@ -25,6 +25,9 @@ class IntlFormatter implements FormatterInterface
      * 
      * Constructor.
      *
+     * @param string $icu_version The current ICU version; mostly used for 
+     * testing.
+     * 
      * @throws Exception\IcuVersionTooLow when the Version of ICU installed 
      * is too low for Aura.Intl to work properly.
      *
