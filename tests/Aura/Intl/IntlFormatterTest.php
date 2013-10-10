@@ -162,20 +162,24 @@ class IntlFormatterTest extends BasicFormatterTest
         $this->assertSame($expect, $actual);
     }
     
-    public function issue6($tokens_values, $expect)
+    /**
+     * @dataProvider provide_testIssue6
+     */
+    public function testIssue6($tokens_values, $expect)
     {
-        $string = '{gender, select, female{{name} is {gender} and she report bugs!} male{{name} is {gender} and he report bugs!} other{{name} is {gender} and it report bugs!}}';
+        $locale = 'en_US';
+        $string = '{gender, select, female{{name} is {gender} and she report bugs!} male{{name} is {gender} and he report bugs!} other{{name} report bugs!}}';
         $formatter = $this->newFormatter();
         $actual = $formatter->format($locale, $string, $tokens_values);
         $this->assertSame($expect, $actual);
     }
     
-    public function provide_issue6()
+    public function provide_testIssue6()
     {
         return [
-            [array('gender' => 'female', 'name' => 'Alice'), 'Alice is female and she report bugs'],
-            [array('gender' => 'male', 'name' => 'Alexander' ), 'Alice is female and she report bugs'],
-            [array('gender' => '', 'name' => 'Unknown'), 'Unknown report bugs'],
+            [array('gender' => 'female', 'name' => 'Alice'), 'Alice is female and she report bugs!'],
+            [array('gender' => 'male', 'name' => 'Alexander' ), 'Alexander is male and he report bugs!'],
+            [array('gender' => '', 'name' => 'Unknown'), 'Unknown report bugs!'],
         ];
     }
 }
