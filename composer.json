@@ -18,6 +18,17 @@
     "autoload": {
         "psr-0": {
             "Aura\\Intl": "src/"
+        },        
+        "psr-4": {
+            "Aura\\Intl\\_Config\\": "config/"
+        }
+    },
+    "extra": {
+        "aura": {
+            "type": "library",
+            "config": {
+                "common": "Aura\\Intl\\_Config\\Common"                
+            }
         }
     }
 }
