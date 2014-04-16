@@ -24,7 +24,7 @@ instantiate a translator locator object.
 
 ```php
 <?php
-$translators = include '/path/to/Aura.Http/scripts/instance.php';
+$translators = include '/path/to/Aura.Intl/scripts/instance.php';
 ```
 
 Alternatively, we can add the Aura.Intl package `/path/to/Aura.Intl/src` to 
@@ -40,8 +40,8 @@ use Aura\Intl\TranslatorLocator;
 return new TranslatorLocator(
     new PackageLocator,
     new FormatterLocator([
-        'basic' => function() { return new Aura\Intl\Formatter\BasicFormatter; },
-        'intl'  => function() { return new Aura\Intl\Formatter\IntlFormatter; },
+        'basic' => function() { return new Aura\Intl\BasicFormatter; },
+        'intl'  => function() { return new Aura\Intl\IntlFormatter; },
     ]),
     new TranslatorFactory,
     'en_US'
@@ -53,7 +53,7 @@ Setting Localized Messages For A Package
 
 We can set localized messages for a package through the `PackageLocator` object
 from the translator locator. We create a new `Package` with messages and place
-it into the locator. The messages take the form of a message key and
+it into the locator as a callable. The messages take the form of a message key and
 and message string.
 
 ```php
@@ -63,25 +63,27 @@ use Aura\Intl\Package;
 // get the package locator
 $packages = $translators->getPackages();
 
-// create a US English message set
-$package = new Package;
-$package->setMessages([
-    'FOO' => 'The text for "foo."';
-    'BAR' => 'The text for "bar."';
-]);
-
 // place into the locator for Vendor.Package
-$packages->set('Vendor.Package', 'en_US', $package);
-
-// a Brazilian Portuguese message set
-$package = new Package;
-$package->setMessages([
-    'FOO' => 'O texto de "foo".';
-    'BAR' => 'O texto de "bar".';
-]);
+$packages->set('Vendor.Package', 'en_US', function() {
+    // create a US English message set
+    $package = new Package;
+    $package->setMessages([
+        'FOO' => 'The text for "foo."';
+        'BAR' => 'The text for "bar."';
+    ]);
+    return $package;
+});
 
 // place into the locator for a Vendor.Package
-$packages->set('Vendor.Package', 'pt_BR', $package);
+$packages->set('Vendor.Package', 'pt_BR', function() {
+    // a Brazilian Portuguese message set
+    $package = new Package;
+    $package->setMessages([
+        'FOO' => 'O texto de "foo".';
+        'BAR' => 'O texto de "bar".';
+    ]);
+    return $package;
+});
 ```
 
 
@@ -129,19 +131,24 @@ message string needs to have a token placeholder for the dynamic value:
 // get the packages out of the translator locator
 $packages = $translators->getPackages();
 
-// US English messages
-$package = new Package;
-$package->setMessages([
-    'PAGE' => 'Page {page} of {pages} pages.';
-]);
-$packages->set('Vendor.Dynamic', 'en_US', $package);
+$packages->set('Vendor.Dynamic', 'en_US', function() {
 
-// Brazilian Portuguese messages
-$package = new Package;
-$package->setMessages([
-    'PAGE' => 'Página {page} de {pages} páginas.';
-]);
-$packages->set('Vendor.Dynamic', 'pt_BR', $package);
+    // US English messages
+    $package = new Package;
+    $package->setMessages([
+        'PAGE' => 'Page {page} of {pages} pages.';
+    ]);
+    return $package;
+});
+
+$packages->set('Vendor.Dynamic', 'pt_BR', function() {
+    // Brazilian Portuguese messages
+    $package = new Package;
+    $package->setMessages([
+        'PAGE' => 'Página {page} de {pages} páginas.';
+    ]);
+    return $package;
+});
 ```
 
 Then, when we translate the message, we provide an array of tokens and

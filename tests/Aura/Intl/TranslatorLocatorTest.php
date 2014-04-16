@@ -80,4 +80,32 @@ class TranslatorLocatorTest extends \PHPUnit_Framework_TestCase
         $actual = $this->translators->getFormatters();
         $this->assertSame($this->formatters, $actual);
     }
+
+    public function testIssue9()
+    {
+        $this->packages->set('Vendor.Package', 'en_UK', function() {
+            $package = new Package('mock');
+            $package->setMessages([
+                'FOO' => 'The text for "foo."',
+                'BAR' => 'The text for "bar."',
+            ]);
+            return $package;
+        });
+                                         
+        $translator = $this->translators->get('Vendor.Package', 'en_UK');
+        $expect = 'The text for "foo."';
+        $this->assertSame($translator->translate('FOO'), $expect);
+    }
+
+    public function testIssue9Failure()
+    {
+        $package = new Package;
+        $package->setMessages([
+            'FOO' => 'The text for "foo."',
+            'BAR' => 'The text for "bar."',
+        ]);
+        // $this->packages->set('Vendor.Package', 'en_UK', $package);
+        // $this->setExpectedException('Exception');
+        // $translator = $this->translators->get('Vendor.Package', 'en_UK');
+    }
 }
