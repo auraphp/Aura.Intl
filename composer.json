@@ -1,6 +1,6 @@
 {
     "name": "aura/intl",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "type": "aura-package",
     "description": "The Aura.Intl package provides internationalization (I18N) tools, specifically\npackage-oriented per-locale message translation.",
     "keywords": [
@@ -13,7 +13,7 @@
         "globalization"
     ],
     "homepage": "http://auraphp.com/Aura.Intl",
-    "time": "2013-09-09",
+    "time": "2014-05-31",
     "license": "BSD-2-Clause",
     "authors": [
         {
@@ -27,18 +27,16 @@
         },
         {
             "name": "Pascal Borreli",
-            "email": "pascal@borreli.com",
-            "homepage": ""
+            "email": "pascal@borreli.com"
         },
         {
             "name": "Mapthegod",
-            "email": "mapthegod@gmail.com",
-            "homepage": ""
+            "email": "mapthegod@gmail.com"
         }
     ],
     "require": {
         "php": ">=5.4.0",
-        "aura/installer-default": ">=1.0.0"
+        "aura/installer-default": "1.0.*"
     },
     "autoload": {
         "psr-0": {
