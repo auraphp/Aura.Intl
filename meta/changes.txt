@@ -1,5 +1,9 @@
-- [CHG] When interpolating array values into strings, now converts the array
-  to comma-separated values instead of printing 'Array'.
+Hygiene release.
 
-- [DOC] PHP 5.5 appears to be able to format strings with missing token
-  replacements; updated tests to account for this.
+- Merge pull request #10 from harikt/fixdoc; fixes #9, add a test for failure. The expected exception need to be fixed.
+
+- Merge pull request #8 from harikt/v2config, adding v2 config files.
+
+- Merge pull request #7 from harikt/issue6, add a test to show it works. Thank you @samdark.
+
+- Point travis status badge to develop branch
