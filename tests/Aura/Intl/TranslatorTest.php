@@ -70,4 +70,22 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         $actual = $translator->translate('TEXT_NONE');
         $this->assertSame($expect, $actual);
     }
+
+    public function testTranslateMissingKey()
+    {
+        $formatter = $this->getMock(get_class($this->formatter));
+        // create fallback translator
+        $translator = new Translator('en_US', [], $formatter);
+
+        $formatter
+            ->method('format')
+            ->with('en_US', 'TEXT', ['var' => 'SOME'])
+            ->will($this->returnValue('FORMATTED'));
+
+        // key does not exist, with tokens passed
+        $expect = 'FORMATTED';
+        $actual = $translator->translate('TEXT', ['var' => 'SOME']);
+        $this->assertEquals($expect, $actual);
+	}
+
 }

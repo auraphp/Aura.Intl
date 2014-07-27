@@ -129,7 +129,7 @@ class Translator implements TranslatorInterface
         // do we have a message string?
         if (! $message) {
             // no, return the message key as-is
-            return $key;
+            $message = $key;
         }
 
         // are there token replacement values?
