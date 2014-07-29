@@ -86,6 +86,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         $expect = 'FORMATTED';
         $actual = $translator->translate('TEXT', ['var' => 'SOME']);
         $this->assertEquals($expect, $actual);
-	}
+    }
 
 }
