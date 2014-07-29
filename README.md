@@ -25,9 +25,10 @@ instantiate a translator locator object.
 ```php
 <?php
 $translators = include '/path/to/Aura.Intl/scripts/instance.php';
+?>
 ```
 
-Alternatively, we can add the Aura.Intl package `/path/to/Aura.Intl/src` to 
+Alternatively, we can add the Aura.Intl package `/path/to/Aura.Intl/src` to
 our autoloader and build a translator locator manually:
 
 ```php
@@ -46,6 +47,7 @@ return new TranslatorLocator(
     new TranslatorFactory,
     'en_US'
 );
+?>
 ```
 
 Setting Localized Messages For A Package
@@ -84,6 +86,7 @@ $packages->set('Vendor.Package', 'pt_BR', function() {
     ]);
     return $package;
 });
+?>
 ```
 
 
@@ -91,10 +94,11 @@ Setting The Default Locale
 --------------------------
 
 We can set the default locale for translations using the `setLocale()` method:
-    
+
 ```php
 <?php
 $translators->setLocale('pt_BR');
+?>
 ```
 
 Getting A Localized Message
@@ -109,14 +113,16 @@ injection into another class, or for standalone use.
 // recall that the default locale is pt_BR
 $translator = $translators->get('Vendor.Package');
 echo $translator->translate('FOO'); // 'O texto de "foo".'
+?>
 ```
 
 You can get a translator for a non-default locale as well:
-    
+
 ```php
 <?php
 $translator = $translators->get('Vendor.Package', 'en_US');
 echo $translator->translate('FOO'); // 'The text for "foo."'
+?>
 ```
 
 
@@ -125,7 +131,7 @@ Replacing Message Tokens With Values
 
 We often need to use dynamic values in translated messages. First, the
 message string needs to have a token placeholder for the dynamic value:
-    
+
 ```php
 <?php
 // get the packages out of the translator locator
@@ -149,6 +155,7 @@ $packages->set('Vendor.Dynamic', 'pt_BR', function() {
     ]);
     return $package;
 });
+?>
 ```
 
 Then, when we translate the message, we provide an array of tokens and
@@ -162,6 +169,7 @@ echo $translator->translate('PAGE', [
     'page' => 1,
     'pages' => 1,
 ]); // 'Página 1 de 1 páginas.'
+?>
 ```
 
 Pluralized Messages
@@ -217,6 +225,7 @@ echo $translator->translate('PAGE', [
     'page' => 3,
     'pages' => 10,
 ]); // 'Page 3 of 10 pages.'
+?>
 ```
 
 Note that you can use other tokens within a pluralized token string to build
