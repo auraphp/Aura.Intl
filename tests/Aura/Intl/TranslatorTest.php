@@ -4,18 +4,18 @@ namespace Aura\Intl;
 class TranslatorTest extends \PHPUnit_Framework_TestCase
 {
     protected $translator;
-    
+
     protected $factory;
-    
+
     protected $locale = 'en_US';
-    
+
     protected $messages = [
         'TEXT_FOO' => 'Foo text',
         'TEXT_BAR' => 'Bar text',
     ];
-    
+
     protected $formatter;
-    
+
     protected function newTranslator(TranslatorInterface $fallback = null)
     {
         return $this->factory->newInstance(
@@ -25,32 +25,32 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
             $fallback
         );
     }
-    
+
     protected function setUp()
     {
         $this->factory = new TranslatorFactory;
         $this->formatter = new MockFormatter;
         $this->translator = $this->newTranslator();
     }
-    
+
     public function testTranslate()
     {
         // key exists
         $expect = 'Foo text';
         $actual = $this->translator->translate('TEXT_FOO');
         $this->assertSame($expect, $actual);
-        
+
         // key exists, with tokens passed
         $expect = 'Foo text';
         $actual = $this->translator->translate('TEXT_FOO', ['foo' => 'bar']);
         $this->assertSame($expect, $actual);
-        
+
         // key does not exist
         $expect = 'TEXT_NONE';
         $actual = $this->translator->translate('TEXT_NONE');
         $this->assertSame($expect, $actual);
     }
-    
+
     public function testTranslate_fallback()
     {
         // create fallback translator
@@ -61,10 +61,10 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
             ],
             $this->formatter
         );
-        
+
         // create primary translator with fallback
         $translator = $this->newTranslator($fallback);
-        
+
         // key does not exist in primary, but exists in fallback
         $expect = 'Fallback text';
         $actual = $translator->translate('TEXT_NONE');
@@ -77,7 +77,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         // create fallback translator
         $translator = new Translator('en_US', [], $formatter);
 
-        $formatter
+        $formatter->expects($this->once())
             ->method('format')
             ->with('en_US', 'TEXT', ['var' => 'SOME'])
             ->will($this->returnValue('FORMATTED'));
