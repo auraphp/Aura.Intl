@@ -1,1 +1,1 @@
-- Merge pull request #11 from lorenzo/feature/format-key. If Translator::translate() cannot translate, it now returns the incoming translation key as the translated message. This makes it easier to use the key as a human readable string, which can contain formatting placeholders. With this feature the developer will be able to see immediate feedback of their translation messages without having to translate to a specific locale beforehand.
+Hygiene release: Composer update.
