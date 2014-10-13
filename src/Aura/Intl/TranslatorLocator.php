@@ -130,9 +130,9 @@ class TranslatorLocator
 
     /**
      * 
-     * An object of type PackagesInterface
+     * An object of type PackageLocator
      * 
-     * @return PackagesInterface
+     * @return PackageLocator
      * 
      */
     public function getPackages()
@@ -142,7 +142,7 @@ class TranslatorLocator
 
     /**
      * 
-     * object of type FormatterLocator
+     * An object of type FormatterLocator
      * 
      * @return FormatterLocator
      * 
