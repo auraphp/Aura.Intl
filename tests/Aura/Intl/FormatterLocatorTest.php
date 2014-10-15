@@ -6,7 +6,7 @@ class FormatterLocatorTest extends \PHPUnit_Framework_TestCase
     public function test__constructAndGet()
     {
         $formatters = new FormatterLocator([
-            'mock' => function() {
+            'mock' => function () {
                 return new \Aura\Intl\MockFormatter;
             },
         ]);

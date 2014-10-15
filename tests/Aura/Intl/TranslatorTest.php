@@ -87,5 +87,4 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         $actual = $translator->translate('TEXT', ['var' => 'SOME']);
         $this->assertEquals($expect, $actual);
     }
-
 }
