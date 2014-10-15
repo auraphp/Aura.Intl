@@ -36,7 +36,9 @@ class TranslatorLocatorTest extends \PHPUnit_Framework_TestCase
         $this->packages = new PackageLocator($registry);
         
         $this->formatters = new FormatterLocator([
-            'mock' => function () { return new MockFormatter; },
+            'mock' => function () {
+                return new MockFormatter;
+            },
         ]);
         
         $this->factory = new TranslatorFactory;
@@ -83,7 +85,7 @@ class TranslatorLocatorTest extends \PHPUnit_Framework_TestCase
 
     public function testIssue9()
     {
-        $this->packages->set('Vendor.Package', 'en_UK', function() {
+        $this->packages->set('Vendor.Package', 'en_UK', function () {
             $package = new Package('mock');
             $package->setMessages([
                 'FOO' => 'The text for "foo."',
