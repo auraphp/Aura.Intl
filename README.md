@@ -41,8 +41,8 @@ use Aura\Intl\TranslatorLocator;
 return new TranslatorLocator(
     new PackageLocator,
     new FormatterLocator([
-        'basic' => function() { return new Aura\Intl\BasicFormatter; },
-        'intl'  => function() { return new Aura\Intl\IntlFormatter; },
+        'basic' => function () { return new \Aura\Intl\BasicFormatter; },
+        'intl'  => function () { return new \Aura\Intl\IntlFormatter; },
     ]),
     new TranslatorFactory,
     'en_US'
@@ -70,8 +70,8 @@ $packages->set('Vendor.Package', 'en_US', function() {
     // create a US English message set
     $package = new Package;
     $package->setMessages([
-        'FOO' => 'The text for "foo."';
-        'BAR' => 'The text for "bar."';
+        'FOO' => 'The text for "foo."',
+        'BAR' => 'The text for "bar."',
     ]);
     return $package;
 });
@@ -81,8 +81,8 @@ $packages->set('Vendor.Package', 'pt_BR', function() {
     // a Brazilian Portuguese message set
     $package = new Package;
     $package->setMessages([
-        'FOO' => 'O texto de "foo".';
-        'BAR' => 'O texto de "bar".';
+        'FOO' => 'O texto de "foo".',
+        'BAR' => 'O texto de "bar".',
     ]);
     return $package;
 });
@@ -142,7 +142,7 @@ $packages->set('Vendor.Dynamic', 'en_US', function() {
     // US English messages
     $package = new Package;
     $package->setMessages([
-        'PAGE' => 'Page {page} of {pages} pages.';
+        'PAGE' => 'Page {page} of {pages} pages.',
     ]);
     return $package;
 });
@@ -151,7 +151,7 @@ $packages->set('Vendor.Dynamic', 'pt_BR', function() {
     // Brazilian Portuguese messages
     $package = new Package;
     $package->setMessages([
-        'PAGE' => 'Página {page} de {pages} páginas.';
+        'PAGE' => 'Página {page} de {pages} páginas.',
     ]);
     return $package;
 });

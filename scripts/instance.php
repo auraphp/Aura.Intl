@@ -7,10 +7,10 @@ return new TranslatorLocator(
     new PackageLocator,
     new FormatterLocator([
         'basic' => function () {
-            return new Aura\Intl\BasicFormatter;
+            return new \Aura\Intl\BasicFormatter;
         },
         'intl'  => function () {
-            return new Aura\Intl\IntlFormatter;
+            return new \Aura\Intl\IntlFormatter;
         },
     ]),
     new TranslatorFactory,
