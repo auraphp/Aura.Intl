@@ -18,5 +18,10 @@
         "psr-4": {
             "Aura\\Intl\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Aura\\Intl\\": "tests/"
+        }
     }
 }
