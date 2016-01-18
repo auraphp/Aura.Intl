@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Aura\\Intl": "src/"
+            "Aura\\Intl\\": "src/"
         }
     }
 }
