@@ -12,7 +12,9 @@ namespace Aura\Intl;
 
 use MessageFormatter;
 use Exception;
+use Aura\Intl\Exception\CannotFormat;
 use Aura\Intl\Exception\CannotInstantiateFormatter;
+use Aura\Intl\Exception\IcuVersionTooLow;
 
 /**
  *
@@ -30,14 +32,14 @@ class IntlFormatter implements FormatterInterface
      * @param string $icu_version The current ICU version; mostly used for
      * testing.
      *
-     * @throws Exception\IcuVersionTooLow when the Version of ICU installed
+     * @throws IcuVersionTooLow when the Version of ICU installed
      * is too low for Aura.Intl to work properly.
      *
      */
     public function __construct($icu_version = INTL_ICU_VERSION)
     {
         if (version_compare($icu_version, '4.8') < 0) {
-            throw new Exception\IcuVersionTooLow('ICU Version 4.8 or higher required.');
+            throw new IcuVersionTooLow('ICU Version 4.8 or higher required.');
         }
     }
 
@@ -111,7 +113,7 @@ class IntlFormatter implements FormatterInterface
 
         $result = $formatter->format($values);
         if ($result === false) {
-            throw new Exception\CannotFormat(
+            throw new CannotFormat(
                 $formatter->getErrorMessage(),
                 $formatter->getErrorCode()
             );
@@ -122,7 +124,7 @@ class IntlFormatter implements FormatterInterface
 
     protected function throwCannotInstantiateFormatter()
     {
-        throw new Exception\CannotInstantiateFormatter(
+        throw new CannotInstantiateFormatter(
             intl_get_error_message(),
             intl_get_error_code()
         );
