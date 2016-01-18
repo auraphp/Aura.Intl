@@ -1,48 +1,52 @@
 <?php
 /**
- * 
+ *
  * This file is part of the Aura Project for PHP.
- * 
+ *
  * @package Aura.Intl
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  */
 namespace Aura\Intl;
 
 use MessageFormatter;
+use Exception;
+use Aura\Intl\Exception\CannotFormat;
+use Aura\Intl\Exception\CannotInstantiateFormatter;
+use Aura\Intl\Exception\IcuVersionTooLow;
 
 /**
- * 
+ *
  * Uses php intl extension to format messages
- * 
+ *
  * @package Aura.Intl
- * 
+ *
  */
 class IntlFormatter implements FormatterInterface
 {
     /**
-     * 
+     *
      * Constructor.
      *
-     * @param string $icu_version The current ICU version; mostly used for 
+     * @param string $icu_version The current ICU version; mostly used for
      * testing.
-     * 
-     * @throws Exception\IcuVersionTooLow when the Version of ICU installed 
+     *
+     * @throws IcuVersionTooLow when the Version of ICU installed
      * is too low for Aura.Intl to work properly.
      *
      */
     public function __construct($icu_version = INTL_ICU_VERSION)
     {
         if (version_compare($icu_version, '4.8') < 0) {
-            throw new Exception\IcuVersionTooLow('ICU Version 4.8 or higher required.');
+            throw new IcuVersionTooLow('ICU Version 4.8 or higher required.');
         }
     }
 
     /**
-     * 
+     *
      * Format the message with the help of php intl extension
-     * 
+     *
      * @param string $locale
      * @param string $string
      * @param array $tokens_values
@@ -59,9 +63,9 @@ class IntlFormatter implements FormatterInterface
         // followed by any non-token word character
         $regex = '/(\{)([A-Za-z0-9_]+)([\,\}])/m';
         preg_match_all($regex, $string, $matches, PREG_SET_ORDER);
-        
+
         foreach ($matches as $match) {
-        
+
             // the token name
             $key = $match[2];
             if (! isset($tokens[$key])) {
@@ -71,7 +75,7 @@ class IntlFormatter implements FormatterInterface
             } else {
                 $num = $tokens[$key];
             }
-            
+
             // replace just the first occurence;
             // other occurrences will get replaced later.
             $string = preg_replace(
@@ -81,39 +85,48 @@ class IntlFormatter implements FormatterInterface
                 1
             );
         }
-        
+
         $values = [];
         foreach ($tokens as $token => $i) {
             if (! isset($tokens_values[$token])) {
                 continue;
             }
-            
+
             $value = $tokens_values[$token];
-            
+
             // convert an array to a CSV string
             if (is_array($value)) {
                 $value = '"' . implode('", "', $value) . '"';
             }
-            
+
             $values[$i] = $value;
         }
 
-        $formatter = new MessageFormatter($locale, $string);
-        if (! $formatter) {
-            throw new Exception\CannotInstantiateFormatter(
-                intl_get_error_message(),
-                intl_get_error_code()
-            );
+        try {
+            $formatter = new MessageFormatter($locale, $string);
+            if (! $formatter) {
+                $this->throwCannotInstantiateFormatter();
+            }
+        } catch (Exception $e) {
+            $this->throwCannotInstantiateFormatter();
         }
 
         $result = $formatter->format($values);
         if ($result === false) {
-            throw new Exception\CannotFormat(
+            throw new CannotFormat(
                 $formatter->getErrorMessage(),
                 $formatter->getErrorCode()
             );
         }
 
         return $result;
+    }
+
+    protected function throwCannotInstantiateFormatter()
+    {
+        throw new CannotInstantiateFormatter(
+            intl_get_error_message(),
+            intl_get_error_code()
+        );
     }
 }
