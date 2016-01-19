@@ -1,50 +1,50 @@
 <?php
 /**
- * 
+ *
  * This file is part of the Aura Project for PHP.
- * 
+ *
  * @package Aura.Intl
- * 
- * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ *
  */
 namespace Aura\Intl;
 
 /**
- * 
+ *
  * A ServiceLocator implementation for loading and retaining formatter objects.
- * 
+ *
  * @package Aura.Intl
- * 
+ *
  */
 class FormatterLocator
 {
     /**
-     * 
+     *
      * A registry to retain formatter objects.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $registry;
 
     /**
-     * 
-     * Tracks whether or not a registry entry has been converted from a 
+     *
+     * Tracks whether or not a registry entry has been converted from a
      * callable to a formatter object.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $converted = [];
-    
+
     /**
-     * 
+     *
      * Constructor.
-     * 
+     *
      * @param array $registry An array of key-value pairs where the key is the
      * formatter name the value is a callable that returns a formatter object.
-     * 
+     *
      */
     public function __construct(array $registry = [])
     {
@@ -54,15 +54,15 @@ class FormatterLocator
     }
 
     /**
-     * 
+     *
      * Sets a formatter into the registry by name.
-     * 
+     *
      * @param string $name The formatter name.
-     * 
+     *
      * @param callable $spec A callable that returns a formatter object.
-     * 
+     *
      * @return void
-     * 
+     *
      */
     public function set($name, $spec)
     {
@@ -71,13 +71,13 @@ class FormatterLocator
     }
 
     /**
-     * 
+     *
      * Gets a formatter from the registry by name.
-     * 
+     *
      * @param string $name The formatter to retrieve.
-     * 
+     *
      * @return FormatterInterface A formatter object.
-     * 
+     *
      */
     public function get($name)
     {

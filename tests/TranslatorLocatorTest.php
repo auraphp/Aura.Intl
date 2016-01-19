@@ -4,13 +4,13 @@ namespace Aura\Intl;
 class TranslatorLocatorTest extends \PHPUnit_Framework_TestCase
 {
     protected $factory;
-    
+
     protected $translators;
-    
+
     protected $packages;
-    
+
     protected $formatters;
-    
+
     protected function setUp()
     {
         $registry['Vendor.Package']['en_US'] = function () {
@@ -22,7 +22,7 @@ class TranslatorLocatorTest extends \PHPUnit_Framework_TestCase
                 ]
             );
         };
-        
+
         $registry['Vendor.Package']['pt_BR'] = function () {
             return new \Aura\Intl\Package(
                 'mock',
@@ -34,15 +34,15 @@ class TranslatorLocatorTest extends \PHPUnit_Framework_TestCase
         };
 
         $this->packages = new PackageLocator($registry);
-        
+
         $this->formatters = new FormatterLocator([
             'mock' => function () {
                 return new MockFormatter;
             },
         ]);
-        
+
         $this->factory = new TranslatorFactory;
-        
+
         $this->translators = new TranslatorLocator(
             $this->packages,
             $this->formatters,
@@ -50,7 +50,7 @@ class TranslatorLocatorTest extends \PHPUnit_Framework_TestCase
             'en_US'
         );
     }
-    
+
     public function testSetAndGetLocale()
     {
         $expect = 'pt_BR';
@@ -58,25 +58,25 @@ class TranslatorLocatorTest extends \PHPUnit_Framework_TestCase
         $actual = $this->translators->getLocale();
         $this->assertSame($expect, $actual);
     }
-    
+
     public function testGetFactory()
     {
         $actual = $this->translators->getFactory();
         $this->assertSame($this->factory, $actual);
     }
-    
+
     public function testGet()
     {
         $actual = $this->translators->get('Vendor.Package');
         $this->assertInstanceOf('Aura\Intl\Translator', $actual);
     }
-    
+
     public function testGetPackages()
     {
         $actual = $this->translators->getPackages();
         $this->assertSame($this->packages, $actual);
     }
-    
+
     public function testGetFormatterLocator()
     {
         $actual = $this->translators->getFormatters();
@@ -93,7 +93,7 @@ class TranslatorLocatorTest extends \PHPUnit_Framework_TestCase
             ]);
             return $package;
         });
-                                         
+
         $translator = $this->translators->get('Vendor.Package', 'en_UK');
         $expect = 'The text for "foo."';
         $this->assertSame($translator->translate('FOO'), $expect);

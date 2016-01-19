@@ -5,7 +5,7 @@
  *
  * @package Aura.Intl
  *
- * @license http://opensource.org/licenses/bsd-license.php BSD
+ * @license http://opensource.org/licenses/MIT MIT
  *
  */
 namespace Aura\Intl;

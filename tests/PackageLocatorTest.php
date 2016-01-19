@@ -8,7 +8,7 @@ namespace Aura\Intl;
 class PackageLocatorTest extends \PHPUnit_Framework_TestCase
 {
     protected $packages;
-    
+
     protected function setUp()
     {
         parent::setUp();
@@ -26,11 +26,11 @@ class PackageLocatorTest extends \PHPUnit_Framework_TestCase
         // get once to create it the first time
         $first = $this->packages->get('Vendor.Foo', 'en_US');
         $this->assertInstanceOf('Aura\Intl\Package', $first);
-        
+
         // get again to make sure it's the same object
         $again = $this->packages->get('Vendor.Foo', 'en_US');
         $this->assertSame($first, $again);
-        
+
         // try for an unregistered package
         $this->setExpectedException('Aura\Intl\Exception');
         $this->packages->get('Vendor.Bar', 'en_US');
