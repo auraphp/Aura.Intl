@@ -104,7 +104,7 @@ class IntlFormatter implements FormatterInterface
             if (! $formatter) {
                 $this->throwCannotInstantiateFormatter();
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->throwCannotInstantiateFormatter();
         }
 
