@@ -13,7 +13,7 @@ as below
 use Aura\Intl\TranslatorLocatorFactory;
 
 $factory = new TranslatorLocatorFactory();
-translators = $factory->newInstance();
+$translators = $factory->newInstance();
 ?>
 ```
 
