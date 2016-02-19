@@ -77,6 +77,8 @@ class FormatterLocator
      * @param string $name The formatter to retrieve.
      *
      * @return FormatterInterface A formatter object.
+     * 
+     * @throws Exception\FormatterNotMapped
      *
      */
     public function get($name)
