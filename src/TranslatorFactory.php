@@ -26,7 +26,7 @@ class TranslatorFactory
      * @var string
      *
      */
-    protected $class = 'Aura\Intl\Translator';
+    protected $class = Translator::class;
 
     /**
      *
