@@ -47,13 +47,12 @@ class Translator implements TranslatorInterface
     protected $locale;
 
     /**
+     * The Package containing keys and translations.
      *
-     * The message keys and translations.
-     *
-     * @var array
+     * @var Package
      *
      */
-    protected $messages = [];
+    protected $package;
 
     /**
      *
@@ -61,7 +60,7 @@ class Translator implements TranslatorInterface
      *
      * @param string $locale The locale being used.
      *
-     * @param array $messages The message keys and translations.
+     * @param Package $package The Package containing keys and translations.
      *
      * @param FormatterInterface $formatter A message formatter.
      *
@@ -70,12 +69,12 @@ class Translator implements TranslatorInterface
      */
     public function __construct(
         $locale,
-        array $messages,
+        Package $package,
         FormatterInterface $formatter,
         TranslatorInterface $fallback = null
     ) {
         $this->locale    = $locale;
-        $this->messages  = $messages;
+        $this->package   = $package;
         $this->formatter = $formatter;
         $this->fallback  = $fallback;
     }
@@ -91,17 +90,19 @@ class Translator implements TranslatorInterface
      */
     protected function getMessage($key)
     {
-        if (isset($this->messages[$key])) {
-            return $this->messages[$key];
+        if ($message = ($this->package->getMessage($key))) {
+            return $message;
         }
 
         if ($this->fallback) {
             // get the message from the fallback translator
             $message = $this->fallback->getMessage($key);
-            // speed optimization: retain locally
-            $this->messages[$key] = $message;
-            // done!
-            return $message;
+            if ($message) {
+                // speed optimization: retain locally
+                $this->package->addMessage($key, $message);
+                // done!
+                return $message;
+            }
         }
 
         // no local message, no fallback

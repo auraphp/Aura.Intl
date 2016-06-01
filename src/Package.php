@@ -84,6 +84,50 @@ class Package
 
     /**
      *
+     * Adds one message for this package.
+     *
+     * @param string $key the key of the message
+     *
+     * @param string $message the actual message
+     *
+     * @return void
+     *
+     */
+    public function addMessage($key, $message)
+    {
+        $this->messages[$key] = $message;
+    }
+
+    /**
+     *
+     * Adds new messages for this package.
+     *
+     * @param array $messages The messages to add in this package.
+     *
+     * @return void
+     *
+     */
+    public function addMessages($messages)
+    {
+        array_merge($this->messages, $messages);
+    }
+
+    /**
+     *
+     * Removes one message for this package.
+     *
+     * @param string $key the key of the message to remove
+     *
+     * @return void
+     *
+     */
+    public function removeMessage($key)
+    {
+        unset($this->messages[$key]);
+    }
+
+    /**
+     *
      * Gets the messages for this package.
      *
      * @return array
@@ -92,6 +136,23 @@ class Package
     public function getMessages()
     {
         return $this->messages;
+    }
+
+
+    /**
+     *
+     * Gets the message of the given key for this package.
+     *
+     * @param string $key the key of the message to return
+     *
+     * @return string|null
+     *
+     */
+    public function getMessage($key)
+    {
+        if (isset($this->messages[$key])) {
+            return $this->messages[$key];
+        }
     }
 
     /**

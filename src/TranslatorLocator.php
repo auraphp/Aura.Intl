@@ -15,7 +15,7 @@ namespace Aura\Intl;
  * A ServiceLocator implementation for loading and retaining translator objects.
  *
  * @package Aura.Intl
- * 
+ *
  */
 class TranslatorLocator
 {
@@ -183,7 +183,7 @@ class TranslatorLocator
             // 'fallback' param at the very end.
             $translator = $this->factory->newInstance(
                 $locale,
-                $package->getMessages(),
+                $package,
                 $this->formatters->get($package->getFormatter()),
                 $this->get($package->getFallback(), $locale)
             );
