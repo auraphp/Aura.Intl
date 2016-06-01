@@ -7,6 +7,8 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
     protected $factory;
 
+    protected $package;
+
     protected $locale = 'en_US';
 
     protected $messages = [
@@ -20,7 +22,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     {
         return $this->factory->newInstance(
             'en_US',
-            $this->messages,
+            $this->package,
             $this->formatter,
             $fallback
         );
@@ -30,6 +32,8 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->factory = new TranslatorFactory;
         $this->formatter = new MockFormatter;
+        $this->package = new Package;
+        $this->package->setMessages($this->messages);
         $this->translator = $this->newTranslator();
     }
 
@@ -53,12 +57,14 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslate_fallback()
     {
+        $package = new Package;
+        $package->setMessages([
+            'TEXT_NONE' => 'Fallback text',
+        ]);
         // create fallback translator
         $fallback = new Translator(
             'en_US',
-            [
-                'TEXT_NONE' => 'Fallback text',
-            ],
+            $package,
             $this->formatter
         );
 
@@ -75,7 +81,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     {
         $formatter = $this->getMock(get_class($this->formatter));
         // create fallback translator
-        $translator = new Translator('en_US', [], $formatter);
+        $translator = new Translator('en_US', new Package, $formatter);
 
         $formatter->expects($this->once())
             ->method('format')
