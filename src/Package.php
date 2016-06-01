@@ -109,7 +109,7 @@ class Package
      */
     public function addMessages($messages)
     {
-        array_merge($this->messages, $messages);
+        $this->messages = array_merge($this->messages, $messages);
     }
 
     /**
