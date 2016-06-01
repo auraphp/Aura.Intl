@@ -142,4 +142,14 @@ class Translator implements TranslatorInterface
         // run message string through formatter to replace tokens with values
         return $this->formatter->format($this->locale, $message, $tokens_values);
     }
+
+    /**
+     *
+     * @return Package
+     *
+     */
+    public function getPackage()
+    {
+        return $this->package;
+    }
 }
