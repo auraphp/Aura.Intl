@@ -131,7 +131,7 @@ class Package
      *
      * @param string $key the key of the message to return
      *
-     * @return string|null
+     * @return mixed The message translation string, or false if not found.
      *
      */
     public function getMessage($key)
@@ -139,6 +139,8 @@ class Package
         if (isset($this->messages[$key])) {
             return $this->messages[$key];
         }
+
+        return false;
     }
 
     /**
