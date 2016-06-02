@@ -90,7 +90,8 @@ class Translator implements TranslatorInterface
      */
     protected function getMessage($key)
     {
-        if ($message = ($this->package->getMessage($key))) {
+        $message = $this->package->getMessage($key);
+        if ($message) {
             return $message;
         }
 
