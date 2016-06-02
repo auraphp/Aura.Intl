@@ -114,20 +114,6 @@ class Package
 
     /**
      *
-     * Removes one message for this package.
-     *
-     * @param string $key the key of the message to remove
-     *
-     * @return void
-     *
-     */
-    public function removeMessage($key)
-    {
-        unset($this->messages[$key]);
-    }
-
-    /**
-     *
      * Gets the messages for this package.
      *
      * @return array
