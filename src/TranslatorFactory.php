@@ -34,7 +34,7 @@ class TranslatorFactory
      *
      * @param string $locale The locale code for the translator.
      *
-     * @param array $messages The localized messages for the translator.
+     * @param Package $package The localized package for the translator.
      *
      * @param FormatterInterface $formatter The formatter to use for
      * interpolating token values.
@@ -47,11 +47,11 @@ class TranslatorFactory
      */
     public function newInstance(
         $locale,
-        array $messages,
+        Package $package,
         FormatterInterface $formatter,
         TranslatorInterface $fallback = null
     ) {
         $class = $this->class;
-        return new $class($locale, $messages, $formatter, $fallback);
+        return new $class($locale, $package, $formatter, $fallback);
     }
 }
