@@ -79,7 +79,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslateMissingKey()
     {
-        $formatter = $this->getMock(get_class($this->formatter));
+        $formatter = $this->createMock(get_class($this->formatter));
         // create fallback translator
         $translator = new Translator('en_US', new Package, $formatter);
 
