@@ -139,8 +139,8 @@ class IntlFormatterTest extends BasicFormatterTest
                 }
             }";
         $formatter = $this->newFormatter();
-        $this->setExpectedException('Aura\Intl\Exception\CannotInstantiateFormatter');
-        $actual = $formatter->format($locale, $string, []);
+        $this->setExpectedException('Aura\Intl\Exception\CannotFormat');
+        $actual = $formatter->format($locale, $string, array('gender' => 'female', 'count' => 5,  'from' => 'Alice', 'to' => 'Bob'));
     }
 
     // @todo MAKE IT SO THAT WE CHECK FOR TOKENS IN THE ARRAY
@@ -151,8 +151,7 @@ class IntlFormatterTest extends BasicFormatterTest
         $tokens_values = ['bar' => 'baz']; // no 'foo' token
         $formatter = $this->newFormatter();
 
-        // 5.5.x will leave the placeholder there
-        $expect = 'Hello {0}';
+        $expect = 'Hello {foo}';
         $actual = $formatter->format($locale, $string, $tokens_values);
         $this->assertSame($expect, $actual);
     }
