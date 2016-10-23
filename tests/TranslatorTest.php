@@ -84,7 +84,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->disableOriginalClone()
             ->disableArgumentCloning()
-            ->disallowMockingUnknownTypes()
             ->getMock();
         // create fallback translator
         $translator = new Translator('en_US', new Package, $formatter);
