@@ -173,8 +173,15 @@ class IntlFormatterTest extends BasicFormatterTest
         $locale = 'en_US';
         $string = '';
         $formatter = $this->newFormatter();
-        $this->setExpectedException('Aura\Intl\Exception\CannotInstantiateFormatter');
+        if (! defined('HHVM_VERSION')) {
+            $this->setExpectedException('Aura\Intl\Exception\CannotInstantiateFormatter');
+        }
         $actual = $formatter->format($locale, $string, []);
+        if (defined('HHVM_VERSION')) {
+            // HHVM will instantiate Formatter even if empty string is passed.
+            $expect = '';
+            $this->assertSame($expect, $actual);
+        }
     }
 
     public function provide_testIssue6()
