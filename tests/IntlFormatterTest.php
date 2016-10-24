@@ -168,6 +168,15 @@ class IntlFormatterTest extends BasicFormatterTest
         $this->assertSame($expect, $actual);
     }
 
+    public function testEmptyStringThrowsException()
+    {
+        $locale = 'en_US';
+        $string = '';
+        $formatter = $this->newFormatter();
+        $this->setExpectedException('Aura\Intl\Exception\CannotInstantiateFormatter');
+        $actual = $formatter->format($locale, $string, []);
+    }
+
     public function provide_testIssue6()
     {
         return [

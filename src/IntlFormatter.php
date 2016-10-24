@@ -64,6 +64,9 @@ class IntlFormatter implements FormatterInterface
 
         try {
             $formatter = new MessageFormatter($locale, $string);
+            if (! $formatter) {
+                $this->throwCannotInstantiateFormatter();
+            }
         } catch (\Exception $e) {
             $this->throwCannotInstantiateFormatter();
         }
