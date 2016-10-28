@@ -135,7 +135,7 @@ class Translator implements TranslatorInterface
         }
 
         // are there token replacement values?
-        if (! $tokens_values) {
+        if (empty($tokens_values)) {
             // no, return the message string as-is
             return $message;
         }

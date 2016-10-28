@@ -60,7 +60,7 @@ class TranslatorLocator
      *
      * A formatter locator.
      *
-     * @var FormatterInterface
+     * @var FormatterLocator
      *
      */
     protected $formatters;
