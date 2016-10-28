@@ -79,7 +79,12 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslateMissingKey()
     {
-        $formatter = $this->getMock(get_class($this->formatter));
+        // using getMockBuilder so we can use with phpunit 4.8 or 5+ without warnings
+        $formatter = $this->getMockBuilder(get_class($this->formatter))
+            ->disableOriginalConstructor()
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->getMock();
         // create fallback translator
         $translator = new Translator('en_US', new Package, $formatter);
 

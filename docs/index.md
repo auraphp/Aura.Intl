@@ -216,7 +216,3 @@ Note that you can use other tokens within a pluralized token string to build
 more complex messages. For more information, see the following:
 
 <http://icu-project.org/apiref/icu4j/com/ibm/icu/text/MessageFormat.html>
-
-> **WARNING:** Using the `{select}` format with named tokens is not supported by
-PHP 5.4.x and earlier. If you need that format, we suggest upgrading your PHP
-version to PHP 5.5 or later.

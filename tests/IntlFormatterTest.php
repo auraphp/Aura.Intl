@@ -139,8 +139,8 @@ class IntlFormatterTest extends BasicFormatterTest
                 }
             }";
         $formatter = $this->newFormatter();
-        $this->setExpectedException('Aura\Intl\Exception\CannotInstantiateFormatter');
-        $actual = $formatter->format($locale, $string, []);
+        $this->setExpectedException('Aura\Intl\Exception\CannotFormat');
+        $actual = $formatter->format($locale, $string, array('gender' => 'female', 'count' => 5,  'from' => 'Alice', 'to' => 'Bob'));
     }
 
     // @todo MAKE IT SO THAT WE CHECK FOR TOKENS IN THE ARRAY
@@ -151,13 +151,7 @@ class IntlFormatterTest extends BasicFormatterTest
         $tokens_values = ['bar' => 'baz']; // no 'foo' token
         $formatter = $this->newFormatter();
 
-        if (version_compare(PHP_VERSION, '5.5') < 0) {
-            // cannot format on 5.4.x
-            $this->setExpectedException('Aura\Intl\Exception\CannotFormat');
-        }
-
-        // 5.5.x will leave the placeholder there
-        $expect = 'Hello {0}';
+        $expect = 'Hello {foo}';
         $actual = $formatter->format($locale, $string, $tokens_values);
         $this->assertSame($expect, $actual);
     }
@@ -172,6 +166,22 @@ class IntlFormatterTest extends BasicFormatterTest
         $formatter = $this->newFormatter();
         $actual = $formatter->format($locale, $string, $tokens_values);
         $this->assertSame($expect, $actual);
+    }
+
+    public function testEmptyStringThrowsException()
+    {
+        $locale = 'en_US';
+        $string = '';
+        $formatter = $this->newFormatter();
+        if (! defined('HHVM_VERSION')) {
+            $this->setExpectedException('Aura\Intl\Exception\CannotInstantiateFormatter');
+        }
+        $actual = $formatter->format($locale, $string, []);
+        if (defined('HHVM_VERSION')) {
+            // HHVM will instantiate Formatter even if empty string is passed.
+            $expect = '';
+            $this->assertSame($expect, $actual);
+        }
     }
 
     public function provide_testIssue6()

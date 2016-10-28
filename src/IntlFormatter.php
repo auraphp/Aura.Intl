@@ -52,51 +52,14 @@ class IntlFormatter implements FormatterInterface
      */
     public function format($locale, $string, array $tokens_values)
     {
-        // extract tokens and retain sequential positions
-        $tokens = [];
-        $i = 0;
-
-        // opening brace, followed by the token word characters,
-        // followed by any non-token word character
-        $regex = '/(\{)([A-Za-z0-9_]+)([\,\}])/m';
-        preg_match_all($regex, $string, $matches, PREG_SET_ORDER);
-
-        foreach ($matches as $match) {
-
-            // the token name
-            $key = $match[2];
-            if (! isset($tokens[$key])) {
-                $tokens[$key] = $i;
-                $num = $i;
-                $i++;
-            } else {
-                $num = $tokens[$key];
-            }
-
-            // replace just the first occurence;
-            // other occurrences will get replaced later.
-            $string = preg_replace(
-                "/$match[0]/",
-                '{' . $num . $match[3],
-                $string,
-                1
-            );
-        }
-
         $values = [];
-        foreach ($tokens as $token => $i) {
-            if (! isset($tokens_values[$token])) {
-                continue;
-            }
-
-            $value = $tokens_values[$token];
-
+        foreach ($tokens_values as $token => $value) {
             // convert an array to a CSV string
             if (is_array($value)) {
                 $value = '"' . implode('", "', $value) . '"';
             }
 
-            $values[$i] = $value;
+            $values[$token] = $value;
         }
 
         try {
