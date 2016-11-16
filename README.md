@@ -13,7 +13,7 @@ Alternatively, [download a release][], or clone this repository, then map the
 
 ## Dependencies
 
-This package requires PHP 5.4 or later; it has been tested on PHP 5.5, 5.6, PHP 7,
+This package requires PHP 5.5 or later; it has been tested on PHP 5.5, 5.6, 7.0
 and HHVM. We recommend using the latest available version of PHP as a matter of
 principle.
 
