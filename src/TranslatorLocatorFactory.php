@@ -19,6 +19,13 @@ namespace Aura\Intl;
  */
 class TranslatorLocatorFactory
 {
+    /**
+     *
+     * Returns a new TranslatorLocator.
+     *
+     * @return TranslatorLocator
+     *
+     */
     public function newInstance()
     {
         return new TranslatorLocator(

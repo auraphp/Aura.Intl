@@ -82,6 +82,12 @@ class IntlFormatter implements FormatterInterface
         return $result;
     }
 
+    /**
+     *
+     * Throws exception
+     *
+     * @throws Exception\CannotInstantiateFormatter
+     */
     protected function throwCannotInstantiateFormatter()
     {
         throw new Exception\CannotInstantiateFormatter(
