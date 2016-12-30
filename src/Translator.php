@@ -146,6 +146,8 @@ class Translator implements TranslatorInterface
 
     /**
      *
+     * An object of type Package
+     *
      * @return Package
      *
      */
