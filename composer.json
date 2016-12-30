@@ -2,12 +2,20 @@
     "name": "aura/intl",
     "type": "library",
     "description": "The Aura Intl package provides internationalization tools, specifically message translation.",
-    "keywords": ["intl", "internationalization", "i18n", "l10n", "localization", "globalization", "g11n"],
+    "keywords": [
+        "intl",
+        "internationalization",
+        "i18n",
+        "l10n",
+        "localization",
+        "globalization",
+        "g11n"
+    ],
     "homepage": "https://github.com/auraphp/Aura.Intl",
     "license": "MIT",
     "authors": [
         {
-            "name": "Aura Contributors",
+            "name": "Aura.Intl Contributors",
             "homepage": "https://github.com/auraphp/Aura.Intl/contributors"
         }
     ],
