@@ -13,7 +13,7 @@ Alternatively, [download a release][], or clone this repository, then map the
 
 ## Dependencies
 
-This package requires PHP 5.5 or later; it has been tested on PHP 5.5, 5.6, 7.0
+This package requires PHP 5.6 or later; it has been tested on PHP 5.6, 7.0
 and HHVM. We recommend using the latest available version of PHP as a matter of
 principle.
 
@@ -24,9 +24,9 @@ without compromising flexibility. For specifics, please examine the package
 
 ## Quality
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/auraphp/Aura.Intl/badges/quality-score.png?b=2.x)](https://scrutinizer-ci.com/g/auraphp/Aura.Intl/)
-[![Code Coverage](https://scrutinizer-ci.com/g/auraphp/Aura.Intl/badges/coverage.png?b=2.x)](https://scrutinizer-ci.com/g/auraphp/Aura.Intl/)
-[![Build Status](https://travis-ci.org/auraphp/Aura.Intl.png?branch=2.x)](https://travis-ci.org/auraphp/Aura.Intl)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/auraphp/Aura.Intl/badges/quality-score.png?b=3.x)](https://scrutinizer-ci.com/g/auraphp/Aura.Intl/)
+[![Code Coverage](https://scrutinizer-ci.com/g/auraphp/Aura.Intl/badges/coverage.png?b=3.x)](https://scrutinizer-ci.com/g/auraphp/Aura.Intl/)
+[![Build Status](https://travis-ci.org/auraphp/Aura.Intl.png?branch=3.x)](https://travis-ci.org/auraphp/Aura.Intl)
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
