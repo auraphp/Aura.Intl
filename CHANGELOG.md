@@ -1,11 +1,16 @@
 # CHANGELOG
 
-## 2.0.0-beta1
+## 3.0.0
+
+- Final release. No changes after first beta.
+
+## 3.0.0-beta1
 
 - Removed `aura/installer-default` from composer.json which was used by aura framework version 1 to install in package folder.
 - Fixes [issue 17](https://github.com/auraphp/Aura.Intl/issues/17) by removing Aura.Di wiring trait tests.
 - Changed directory structure from PSR-0 to PSR-4.
 - Supported PHP version : 5.6+.
+- There is no other BC breaks from 1.x version
 
 
 ## 1.1.1
