@@ -1,7 +1,7 @@
 <?php
 namespace Aura\Intl;
 
-class TranslatorTest extends \PHPUnit_Framework_TestCase
+class TranslatorTest extends \PHPUnit\Framework\TestCase
 {
     protected $translator;
 
@@ -28,7 +28,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->factory = new TranslatorFactory;
         $this->formatter = new MockFormatter;
