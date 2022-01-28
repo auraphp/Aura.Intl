@@ -1,3 +1,5 @@
+package = aura/intl
+
 [commands]
 phpunit = ./vendor/bin/phpunit
 
