@@ -1,7 +1,7 @@
 <?php
 namespace Aura\Intl;
 
-class BasicFormatterTest extends \PHPUnit_Framework_TestCase
+class BasicFormatterTest extends \PHPUnit\Framework\TestCase
 {
     protected function newFormatter()
     {

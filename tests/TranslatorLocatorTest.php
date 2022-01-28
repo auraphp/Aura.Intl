@@ -1,7 +1,7 @@
 <?php
 namespace Aura\Intl;
 
-class TranslatorLocatorTest extends \PHPUnit_Framework_TestCase
+class TranslatorLocatorTest extends \PHPUnit\Framework\TestCase
 {
     protected $factory;
 
@@ -11,7 +11,7 @@ class TranslatorLocatorTest extends \PHPUnit_Framework_TestCase
 
     protected $formatters;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $registry['Vendor.Package']['en_US'] = function () {
             return new \Aura\Intl\Package(
@@ -99,15 +99,15 @@ class TranslatorLocatorTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($translator->translate('FOO'), $expect);
     }
 
-    public function testIssue9Failure()
-    {
-        $package = new Package;
-        $package->setMessages([
-            'FOO' => 'The text for "foo."',
-            'BAR' => 'The text for "bar."',
-        ]);
-        // $this->packages->set('Vendor.Package', 'en_UK', $package);
-        // $this->setExpectedException('Exception');
-        // $translator = $this->translators->get('Vendor.Package', 'en_UK');
-    }
+    // public function testIssue9Failure()
+    // {
+    //     $package = new Package;
+    //     $package->setMessages([
+    //         'FOO' => 'The text for "foo."',
+    //         'BAR' => 'The text for "bar."',
+    //     ]);
+    //     $this->packages->set('Vendor.Package', 'en_UK', $package);
+    //     $this->expectException('Exception');
+    //     $translator = $this->translators->get('Vendor.Package', 'en_UK');
+    // }
 }
