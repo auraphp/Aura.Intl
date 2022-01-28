@@ -1,7 +1,7 @@
 <?php
 namespace Aura\Intl;
 
-class FormatterLocatorTest extends \PHPUnit_Framework_TestCase
+class FormatterLocatorTest extends \PHPUnit\Framework\TestCase
 {
     public function test__constructAndGet()
     {
@@ -31,7 +31,7 @@ class FormatterLocatorTest extends \PHPUnit_Framework_TestCase
     public function testGet_noSuchFormatter()
     {
         $formatters = new FormatterLocator;
-        $this->setExpectedException('Aura\Intl\Exception\FormatterNotMapped');
+        $this->expectException('Aura\Intl\Exception\FormatterNotMapped');
         $formatters->get('noSuchFormatter');
     }
 }
