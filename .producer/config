@@ -1,5 +1,5 @@
 [commands]
-phpunit = /path/to/phpunit
+phpunit = ./vendor/bin/phpunit
 
 [files]
 changes = CHANGELOG.md
