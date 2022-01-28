@@ -50,7 +50,7 @@ jobs:
         run: composer install --no-interaction --prefer-dist
 
       - name: Install phpunit
-        run: composer require-dev phpunit/phpunit --no-interaction --prefer-dist
+        run: composer require --dev phpunit/phpunit -W --no-interaction --prefer-dist
 
       - name: Run test suite
         run: ./vendor/bin/phpunit
