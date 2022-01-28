@@ -1,7 +1,9 @@
 <?php
 namespace Aura\Intl;
 
-class FormatterLocatorTest extends \PHPUnit\Framework\TestCase
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
+
+class FormatterLocatorTest extends TestCase
 {
     public function test__constructAndGet()
     {

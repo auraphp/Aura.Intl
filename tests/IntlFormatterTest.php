@@ -8,7 +8,7 @@ class IntlFormatterTest extends BasicFormatterTest
         return new IntlFormatter;
     }
 
-    public function setUp(): void
+    public function set_up()
     {
         if (! extension_loaded('intl')) {
             $this->markTestSkipped('This test is skipped if the Intl Extension is not loaded.');

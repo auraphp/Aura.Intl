@@ -1,7 +1,9 @@
 <?php
 namespace Aura\Intl;
 
-class BasicFormatterTest extends \PHPUnit\Framework\TestCase
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
+
+class BasicFormatterTest extends TestCase
 {
     protected function newFormatter()
     {

@@ -1,7 +1,9 @@
 <?php
 namespace Aura\Intl;
 
-class TranslatorLocatorTest extends \PHPUnit\Framework\TestCase
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
+
+class TranslatorLocatorTest extends TestCase
 {
     protected $factory;
 
@@ -11,7 +13,7 @@ class TranslatorLocatorTest extends \PHPUnit\Framework\TestCase
 
     protected $formatters;
 
-    protected function setUp(): void
+    protected function set_up()
     {
         $registry['Vendor.Package']['en_US'] = function () {
             return new \Aura\Intl\Package(
