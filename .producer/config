@@ -1,0 +1,9 @@
+[commands]
+phpunit = /path/to/phpunit
+
+[files]
+changes = CHANGELOG.md
+contributing = CONTRIBUTING.md
+license = LICENSE.md
+phpunit = phpunit.xml.dist
+readme = README.md
