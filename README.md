@@ -13,8 +13,7 @@ Alternatively, [download a release][], or clone this repository, then map the
 
 ## Dependencies
 
-This package requires PHP 5.6 or later; it has been tested on PHP 5.6, 7.0
-and HHVM. We recommend using the latest available version of PHP as a matter of
+This package requires PHP 5.6 or later; it has been tested on PHP 5.6-8.1. We recommend using the latest available version of PHP as a matter of
 principle.
 
 Aura library packages may sometimes depend on external interfaces, but never on
@@ -25,8 +24,8 @@ without compromising flexibility. For specifics, please examine the package
 ## Quality
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/auraphp/Aura.Intl/badges/quality-score.png?b=3.x)](https://scrutinizer-ci.com/g/auraphp/Aura.Intl/)
-[![Code Coverage](https://scrutinizer-ci.com/g/auraphp/Aura.Intl/badges/coverage.png?b=3.x)](https://scrutinizer-ci.com/g/auraphp/Aura.Intl/)
-[![Build Status](https://travis-ci.org/auraphp/Aura.Intl.png?branch=3.x)](https://travis-ci.org/auraphp/Aura.Intl)
+[![codecov](https://codecov.io/gh/auraphp/Aura.Intl/branch/3.x/graph/badge.svg)](https://codecov.io/gh/auraphp/Aura.Intl)
+[![Continuous Integration](https://github.com/auraphp/Aura.Intl/actions/workflows/continuous-integration.yml/badge.svg?branch=3.x)](https://github.com/auraphp/Aura.Intl/actions/workflows/continuous-integration.yml)
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
