@@ -8,12 +8,18 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    name: PHP ${{ matrix.php-version }}
+
+    runs-on: ${{ matrix.operating-system }}
 
     strategy:
+      # Every version reports for itself; one red job should not hide the rest.
+      fail-fast: false
       matrix:
         operating-system:
           - ubuntu-latest
+        # The whole range admitted by the php constraint in composer.json,
+        # ^5.6 || ^7.0 || ^8.0, up to the current release, 8.5.
         php-version:
           - '5.6'
           - '7.0'
@@ -24,16 +30,36 @@ jobs:
           - '8.0'
           - '8.1'
           - '8.2'
+          - '8.3'
+          - '8.4'
+          - '8.5'
+        include:
+          # Composer 2.3 and later need PHP 7.2.5, so anything older stays on
+          # the 2.2 LTS line. Everything else tracks the current 2.x.
+          - php-version: '5.6'
+            composer-version: '2.2'
+          - php-version: '7.0'
+            composer-version: '2.2'
+          - php-version: '7.1'
+            composer-version: '2.2'
+          # One job measures coverage. The report is the same whichever version
+          # produces it, and collecting it everywhere only bought twelve
+          # uploads of it -- including from the PHPUnit versions that write no
+          # clover file at all, which failed the upload quietly.
+          - php-version: '8.4'
+            coverage: true
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v5
 
       - name: Setup PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          coverage: xdebug
-          tools: composer:2.2
+          extensions: intl
+          coverage: ${{ matrix.coverage && 'xdebug' || 'none' }}
+          tools: composer:${{ matrix.composer-version || 'v2' }}
           ini-values: assert.exception=1, zend.assertions=1
 
       - name: Get composer cache directory
@@ -41,19 +67,42 @@ jobs:
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+          # There is no committed lock file, and each PHP version resolves to a
+          # different PHPUnit, so the version is part of the key.
+          key: ${{ runner.os }}-php${{ matrix.php-version }}-composer-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ runner.os }}-php${{ matrix.php-version }}-composer-
 
       - name: Install dependencies
-        run: composer install --no-interaction --prefer-dist
+        run: composer install --no-interaction --prefer-dist --no-progress
 
       - name: Run test suite
-        run: php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-clover=coverage.xml
+        run: php -d xdebug.mode=coverage ./vendor/bin/phpunit --log-junit=junit.xml ${{ matrix.coverage && '--coverage-clover=coverage.xml' || '' }}
+
+      - name: Check the suite was not empty
+        # One config file drives PHPUnit 5.7 through 9.6 here. A version that
+        # read it and selected nothing would still exit 0, so the run is only
+        # green if it actually executed tests.
+        run: |
+          php -r '
+            $log = simplexml_load_file("junit.xml");
+            $tests = 0;
+            foreach ($log->testsuite as $suite) {
+                $tests += (int) $suite["tests"];
+            }
+            if ($tests < 1) {
+                fwrite(STDERR, "No tests were executed." . PHP_EOL);
+                exit(1);
+            }
+            echo $tests . " tests executed." . PHP_EOL;
+          '
 
       - name: Upload coverage report
-        uses: codecov/codecov-action@v2
+        if: ${{ matrix.coverage }}
+        uses: codecov/codecov-action@v5
         with:
+          files: ./coverage.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: false
