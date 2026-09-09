@@ -3,3 +3,5 @@
 /composer.lock
 /.phpunit.result.cache
 /.phpdoc
+/junit.xml
+/coverage.xml
